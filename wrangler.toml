@@ -1,5 +1,6 @@
 name = "arcknights"
 compatibility_date = "2026-04-01"
+main = "worker/index.ts"
 
 routes = [
   { pattern = "arc.orcax.net", custom_domain = true },
@@ -8,3 +9,8 @@ routes = [
 [assets]
 directory = "./out"
 not_found_handling = "single-page-application"
+binding = "ASSETS"
+
+[[kv_namespaces]]
+binding = "DATA"
+id = "fc8d93721baa466680d1dac68f63a9fd"

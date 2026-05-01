@@ -1,6 +1,6 @@
 "use client";
 
-import { WEAPON_BY_ID } from "@/data";
+import { useWeaponById } from "@/data/runtime";
 import { RarityStars } from "./RarityStars";
 
 interface Props {
@@ -10,8 +10,9 @@ interface Props {
 }
 
 export function SelectedWeapons({ selectedIds, onRemove, onClear }: Props) {
+  const weaponById = useWeaponById();
   const list = [...selectedIds]
-    .map((id) => WEAPON_BY_ID.get(id))
+    .map((id) => weaponById.get(id))
     .filter((w): w is NonNullable<typeof w> => Boolean(w));
 
   return (

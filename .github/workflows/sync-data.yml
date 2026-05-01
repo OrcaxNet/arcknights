@@ -60,38 +60,38 @@ jobs:
       - name: Verify data still validates
         run: pnpm test
 
-      - name: Commit if changed
-        id: commit
+      - name: Detect changes
+        id: detect
         run: |
           if git diff --quiet -- src/data/bundle.json; then
             echo "No changes."
             echo "changed=false" >> "$GITHUB_OUTPUT"
-            exit 0
+          else
+            echo "changed=true" >> "$GITHUB_OUTPUT"
           fi
+
+      # 数据写入直接到 KV，不依赖代码部署
+      - name: Upload bundle to Cloudflare KV
+        if: steps.detect.outputs.changed == 'true'
+        env:
+          CLOUDFLARE_API_TOKEN: ${{ secrets.CLOUDFLARE_API_TOKEN }}
+          CLOUDFLARE_ACCOUNT_ID: ${{ secrets.CLOUDFLARE_ACCOUNT_ID }}
+        run: pnpm run kv:upload
+
+      # 把 bundle.json 也提交一份做审计/回退（CI/CD 已经 paths-ignore 这个文件，不会触发部署）
+      - name: Commit bundle.json (audit trail)
+        if: steps.detect.outputs.changed == 'true'
+        run: |
           git config user.name "Claude"
           git config user.email "bot@orcax.net"
           git add src/data/bundle.json
           git commit -m "chore(data): sync from skland wiki ($(date -u +%Y-%m-%d))"
           git push
-          echo "changed=true" >> "$GITHUB_OUTPUT"
-
-      # 数据更新自带部署，不触发 deploy.yml（paths-ignore 已排除 bundle.json）。
-      - name: Build for deploy
-        if: steps.commit.outputs.changed == 'true'
-        run: pnpm build
-
-      - name: Deploy to Cloudflare Workers
-        if: steps.commit.outputs.changed == 'true'
-        uses: cloudflare/wrangler-action@v3
-        with:
-          apiToken: ${{ secrets.CLOUDFLARE_API_TOKEN }}
-          accountId: ${{ secrets.CLOUDFLARE_ACCOUNT_ID }}
-          command: deploy
 
       - name: Summary
         run: |
-          if [ "${{ steps.commit.outputs.changed }}" = "true" ]; then
-            echo "Data updated and deployed independently of CI/CD."
+          if [ "${{ steps.detect.outputs.changed }}" = "true" ]; then
+            echo "Data changed → uploaded to KV; bundle.json committed for audit."
           else
-            echo "No data changes; nothing to deploy."
+            echo "No data changes; nothing to do."
           fi

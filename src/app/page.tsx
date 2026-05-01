@@ -4,23 +4,24 @@ import { useMemo, useState } from "react";
 import { WeaponPicker } from "@/components/WeaponPicker";
 import { SelectedWeapons } from "@/components/SelectedWeapons";
 import { ResultPanel } from "@/components/ResultPanel";
-import { WEAPON_BY_ID, DEPOSITION_POINTS } from "@/data";
+import { useRuntimeData } from "@/data/runtime";
 import { optimize, uncoveredWeapons } from "@/lib/optimizer";
 
 export default function Home() {
+  const { weaponById, depositionPoints, source, fetchedAt } = useRuntimeData();
   const [selectedIds, setSelectedIds] = useState<Set<string>>(new Set());
 
   const selectedWeapons = useMemo(
     () =>
       [...selectedIds]
-        .map((id) => WEAPON_BY_ID.get(id))
+        .map((id) => weaponById.get(id))
         .filter((w): w is NonNullable<typeof w> => Boolean(w)),
-    [selectedIds],
+    [selectedIds, weaponById],
   );
 
   const plans = useMemo(
-    () => optimize(selectedWeapons, DEPOSITION_POINTS, { topK: 5 }),
-    [selectedWeapons],
+    () => optimize(selectedWeapons, depositionPoints, { topK: 5 }),
+    [selectedWeapons, depositionPoints],
   );
 
   const uncovered = useMemo(() => {
@@ -64,7 +65,17 @@ export default function Home() {
       )}
 
       <footer className="mt-8 border-t border-zinc-900 pt-4 text-[10px] text-zinc-600">
-        数据来源：森空岛官方 wiki。淤积点支持的技能词条池仅供参考，需要根据实际游玩补全。
+        数据来源：森空岛官方 wiki ·
+        {source === "kv" ? (
+          <span className="ml-1">
+            数据来自 KV
+            {fetchedAt
+              ? `（${new Date(fetchedAt).toLocaleTimeString("zh-CN")}）`
+              : ""}
+          </span>
+        ) : (
+          <span className="ml-1">使用打包内置数据</span>
+        )}
       </footer>
     </div>
   );

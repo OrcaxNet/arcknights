@@ -1,7 +1,7 @@
 "use client";
 
 import { useMemo, useState } from "react";
-import { WEAPONS } from "@/data";
+import { useRuntimeData } from "@/data/runtime";
 import type { Rarity, Weapon, WeaponClass } from "@/lib/types";
 import { RarityStars } from "./RarityStars";
 
@@ -20,12 +20,13 @@ interface Props {
 }
 
 export function WeaponPicker({ selectedIds, onToggle }: Props) {
+  const { weapons } = useRuntimeData();
   const [classFilter, setClassFilter] = useState<WeaponClass | "all">("all");
   const [rarityFilter, setRarityFilter] = useState<Rarity | "all">("all");
   const [query, setQuery] = useState("");
 
   const list = useMemo(() => {
-    return WEAPONS.filter((w) => {
+    return weapons.filter((w) => {
       if (classFilter !== "all" && w.weaponClass !== classFilter) return false;
       if (rarityFilter !== "all" && w.rarity !== rarityFilter) return false;
       if (query && !w.name.includes(query) && !w.operator?.includes(query)) {
@@ -33,7 +34,7 @@ export function WeaponPicker({ selectedIds, onToggle }: Props) {
       }
       return true;
     });
-  }, [classFilter, rarityFilter, query]);
+  }, [weapons, classFilter, rarityFilter, query]);
 
   return (
     <section className="flex flex-col gap-3">

@@ -1,6 +1,6 @@
 "use client";
 
-import { WEAPON_BY_ID } from "@/data";
+import { useWeaponById } from "@/data/runtime";
 import type { LockPlan, Weapon } from "@/lib/types";
 
 interface Props {
@@ -20,6 +20,7 @@ function expectedDrops(p: number) {
 }
 
 export function ResultPanel({ plans, uncovered }: Props) {
+  const weaponById = useWeaponById();
   if (plans.length === 0) {
     return (
       <section className="rounded-lg border border-zinc-800 bg-zinc-900/50 px-4 py-6 text-center text-sm text-zinc-400">
@@ -32,10 +33,24 @@ export function ResultPanel({ plans, uncovered }: Props) {
 
   const [best, ...alternatives] = plans;
 
+  return renderPanel({ best, alternatives, uncovered, weaponById });
+}
+
+function renderPanel({
+  best,
+  alternatives,
+  uncovered,
+  weaponById,
+}: {
+  best: LockPlan;
+  alternatives: LockPlan[];
+  uncovered: Weapon[];
+  weaponById: Map<string, Weapon>;
+}) {
   return (
     <section className="flex flex-col gap-4">
       <h2 className="text-sm font-semibold text-amber-300">推荐方案</h2>
-      <PlanCard plan={best} primary />
+      <PlanCard plan={best} primary weaponById={weaponById} />
 
       {uncovered.length > 0 && (
         <div className="rounded-md border border-rose-900/50 bg-rose-950/30 px-3 py-2 text-xs text-rose-300">
@@ -58,7 +73,7 @@ export function ResultPanel({ plans, uncovered }: Props) {
           </summary>
           <div className="flex flex-col gap-2 px-3 py-2">
             {alternatives.map((p, i) => (
-              <PlanCard key={i} plan={p} />
+              <PlanCard key={i} plan={p} weaponById={weaponById} />
             ))}
           </div>
         </details>
@@ -67,7 +82,15 @@ export function ResultPanel({ plans, uncovered }: Props) {
   );
 }
 
-function PlanCard({ plan, primary }: { plan: LockPlan; primary?: boolean }) {
+function PlanCard({
+  plan,
+  primary,
+  weaponById,
+}: {
+  plan: LockPlan;
+  primary?: boolean;
+  weaponById: Map<string, Weapon>;
+}) {
   return (
     <div
       className={`flex flex-col gap-3 rounded-lg border px-3 py-3 ${
@@ -122,7 +145,7 @@ function PlanCard({ plan, primary }: { plan: LockPlan; primary?: boolean }) {
         </div>
         <ul className="flex flex-col gap-0.5 text-xs">
           {plan.hits.map((h) => {
-            const w = WEAPON_BY_ID.get(h.weaponId);
+            const w = weaponById.get(h.weaponId);
             return (
               <li
                 key={h.weaponId}

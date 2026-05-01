@@ -8,8 +8,13 @@
     "start": "next start",
     "test": "vitest run",
     "test:watch": "vitest",
-    "preview": "wrangler dev",
-    "deploy": "next build && wrangler deploy"
+    "preview": "next build && wrangler dev",
+    "deploy": "next build && wrangler deploy",
+    "scrape": "tsx scripts/scrape-skland.ts",
+    "scrape:manifest": "tsx scripts/scrape-skland.ts --from-manifest",
+    "kv:upload": "tsx scripts/upload-bundle.ts",
+    "kv:upload:local": "tsx scripts/upload-bundle.ts --local",
+    "kv:get": "wrangler kv key get --binding=DATA --remote bundle"
   },
   "dependencies": {
     "next": "16.2.4",
@@ -18,6 +23,7 @@
     "zod": "^4.4.1"
   },
   "devDependencies": {
+    "@cloudflare/workers-types": "^4.20260501.1",
     "@tailwindcss/postcss": "^4",
     "@types/node": "^20",
     "@types/react": "^19",
