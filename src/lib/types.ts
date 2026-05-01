@@ -1,34 +1,14 @@
-export type Rarity = 4 | 5 | 6;
+export type {
+  Weapon,
+  DepositionPoint,
+  Rarity,
+  WeaponClass,
+  Region,
+  AttributePools,
+  DataBundle,
+} from "@/data/schema";
 
-export type WeaponClass =
-  | "单手剑"
-  | "双手剑"
-  | "长柄"
-  | "手铳"
-  | "施术单元";
-
-export type Region = "四号谷地" | "武陵";
-
-export interface Weapon {
-  id: string;
-  name: string;
-  rarity: Rarity;
-  weaponClass: WeaponClass;
-  operator?: string;
-  imageUrl?: string;
-  ideal: {
-    base: string;
-    add: string;
-    skill: string;
-  };
-}
-
-export interface DepositionPoint {
-  id: string;
-  name: string;
-  region: Region;
-  skillPool: string[];
-}
+import type { DepositionPoint } from "@/data/schema";
 
 export interface LockPlan {
   point: DepositionPoint;

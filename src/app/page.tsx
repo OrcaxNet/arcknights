@@ -4,8 +4,7 @@ import { useMemo, useState } from "react";
 import { WeaponPicker } from "@/components/WeaponPicker";
 import { SelectedWeapons } from "@/components/SelectedWeapons";
 import { ResultPanel } from "@/components/ResultPanel";
-import { WEAPON_BY_ID } from "@/data/weapons";
-import { DEPOSITION_POINTS } from "@/data/depositionPoints";
+import { WEAPON_BY_ID, DEPOSITION_POINTS } from "@/data";
 import { optimize, uncoveredWeapons } from "@/lib/optimizer";
 
 export default function Home() {

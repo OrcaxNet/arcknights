@@ -1,0 +1,10 @@
+{
+  "_comment": "森空岛 wiki gameEntryId 清单。新增武器/基质时把 ID 加到对应数组里，sync-data workflow 会自动拉取。",
+  "weapons": [
+    1400
+  ],
+  "substrates": [
+    465,
+    472
+  ]
+}

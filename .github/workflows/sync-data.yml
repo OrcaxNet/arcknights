@@ -1,0 +1,84 @@
+name: Sync data from skland wiki
+
+on:
+  schedule:
+    # 每周一 06:00 UTC (北京时间 14:00) 自动跑
+    - cron: "0 6 * * 1"
+  workflow_dispatch:
+    inputs:
+      weapon_ids:
+        description: "Override weapon IDs (comma-separated). Empty = use scripts/skland-ids.json"
+        required: false
+        default: ""
+      substrate_ids:
+        description: "Override substrate IDs (comma-separated). Empty = use scripts/skland-ids.json"
+        required: false
+        default: ""
+
+permissions:
+  contents: write
+
+concurrency:
+  group: sync-data
+  cancel-in-progress: false
+
+jobs:
+  sync:
+    runs-on: ubuntu-latest
+    timeout-minutes: 30
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          token: ${{ secrets.GITHUB_TOKEN }}
+
+      - uses: pnpm/action-setup@v4
+        with:
+          version: 10
+
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22
+          cache: pnpm
+
+      - run: pnpm install --frozen-lockfile
+
+      - name: Install Playwright browsers
+        run: pnpm exec playwright install --with-deps chromium
+
+      - name: Run scraper
+        run: |
+          set -euo pipefail
+          ARGS=()
+          if [ -n "${{ github.event.inputs.weapon_ids }}" ] || [ -n "${{ github.event.inputs.substrate_ids }}" ]; then
+            [ -n "${{ github.event.inputs.weapon_ids }}" ] && ARGS+=("--weapons=${{ github.event.inputs.weapon_ids }}")
+            [ -n "${{ github.event.inputs.substrate_ids }}" ] && ARGS+=("--substrates=${{ github.event.inputs.substrate_ids }}")
+          else
+            ARGS+=("--from-manifest")
+          fi
+          pnpm exec tsx scripts/scrape-skland.ts "${ARGS[@]}"
+
+      - name: Verify data still validates
+        run: pnpm test
+
+      - name: Commit and push if changed
+        id: commit
+        run: |
+          if git diff --quiet -- src/data/bundle.json; then
+            echo "No changes."
+            echo "changed=false" >> "$GITHUB_OUTPUT"
+            exit 0
+          fi
+          git config user.name "Claude"
+          git config user.email "bot@orcax.net"
+          git add src/data/bundle.json
+          git commit -m "chore(data): sync from skland wiki ($(date -u +%Y-%m-%d))"
+          git push
+          echo "changed=true" >> "$GITHUB_OUTPUT"
+
+      - name: Summary
+        run: |
+          if [ "${{ steps.commit.outputs.changed }}" = "true" ]; then
+            echo "Data updated → push to main will trigger Deploy workflow."
+          else
+            echo "No data changes; skipping deploy."
+          fi

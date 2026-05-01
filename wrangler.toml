@@ -1,3 +1,10 @@
 name = "arcknights"
 compatibility_date = "2026-04-01"
-pages_build_output_dir = "./out"
+
+routes = [
+  { pattern = "arc.orcax.net", custom_domain = true },
+]
+
+[assets]
+directory = "./out"
+not_found_handling = "single-page-application"

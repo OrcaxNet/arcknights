@@ -1,7 +1,7 @@
 "use client";
 
 import { useMemo, useState } from "react";
-import { WEAPONS } from "@/data/weapons";
+import { WEAPONS } from "@/data";
 import type { Rarity, Weapon, WeaponClass } from "@/lib/types";
 import { RarityStars } from "./RarityStars";
 

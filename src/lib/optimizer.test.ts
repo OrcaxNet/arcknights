@@ -1,7 +1,7 @@
 import { describe, expect, it } from "vitest";
 import type { DepositionPoint, Weapon } from "@/lib/types";
 import { optimize, uncoveredWeapons } from "@/lib/optimizer";
-import { ADD_ATTRS, BASE_LOCK_COUNT } from "@/data/attributes";
+import { ADD_ATTRS, BASE_LOCK_COUNT } from "@/data";
 
 const W = (
   id: string,

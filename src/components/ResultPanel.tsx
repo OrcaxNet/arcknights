@@ -1,6 +1,6 @@
 "use client";
 
-import { WEAPON_BY_ID } from "@/data/weapons";
+import { WEAPON_BY_ID } from "@/data";
 import type { LockPlan, Weapon } from "@/lib/types";
 
 interface Props {

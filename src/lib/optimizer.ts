@@ -2,7 +2,7 @@ import {
   ADD_ATTRS,
   BASE_ATTRS,
   BASE_LOCK_COUNT,
-} from "@/data/attributes";
+} from "@/data";
 import type { DepositionPoint, LockPlan, Weapon } from "@/lib/types";
 
 function chooseK<T>(arr: readonly T[], k: number): T[][] {
