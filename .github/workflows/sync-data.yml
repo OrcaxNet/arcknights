@@ -1,4 +1,4 @@
-name: Sync data from skland wiki
+name: Sync data (Ops)
 
 on:
   schedule:
@@ -60,7 +60,7 @@ jobs:
       - name: Verify data still validates
         run: pnpm test
 
-      - name: Commit and push if changed
+      - name: Commit if changed
         id: commit
         run: |
           if git diff --quiet -- src/data/bundle.json; then
@@ -75,10 +75,23 @@ jobs:
           git push
           echo "changed=true" >> "$GITHUB_OUTPUT"
 
+      # 数据更新自带部署，不触发 deploy.yml（paths-ignore 已排除 bundle.json）。
+      - name: Build for deploy
+        if: steps.commit.outputs.changed == 'true'
+        run: pnpm build
+
+      - name: Deploy to Cloudflare Workers
+        if: steps.commit.outputs.changed == 'true'
+        uses: cloudflare/wrangler-action@v3
+        with:
+          apiToken: ${{ secrets.CLOUDFLARE_API_TOKEN }}
+          accountId: ${{ secrets.CLOUDFLARE_ACCOUNT_ID }}
+          command: deploy
+
       - name: Summary
         run: |
           if [ "${{ steps.commit.outputs.changed }}" = "true" ]; then
-            echo "Data updated → push to main will trigger Deploy workflow."
+            echo "Data updated and deployed independently of CI/CD."
           else
-            echo "No data changes; skipping deploy."
+            echo "No data changes; nothing to deploy."
           fi

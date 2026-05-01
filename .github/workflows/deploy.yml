@@ -1,8 +1,15 @@
-name: Deploy
+name: Deploy (CI/CD)
 
+# 仅 dev 路径：代码改动 / 配置改动触发部署。
+# 运营侧的数据更新不走这里（详见 sync-data.yml）。
 on:
   push:
     branches: [main]
+    paths-ignore:
+      - "src/data/bundle.json"
+      - "scripts/skland-ids.json"
+      - ".github/workflows/sync-data.yml"
+      - "**/*.md"
   workflow_dispatch:
 
 concurrency:
