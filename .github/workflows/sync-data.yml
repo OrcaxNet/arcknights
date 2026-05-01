@@ -76,7 +76,7 @@ jobs:
         env:
           CLOUDFLARE_API_TOKEN: ${{ secrets.CLOUDFLARE_API_TOKEN }}
           CLOUDFLARE_ACCOUNT_ID: ${{ secrets.CLOUDFLARE_ACCOUNT_ID }}
-        run: pnpm run kv:upload
+        run: pnpm exec tsx scripts/upload-bundle.ts
 
       # 把 bundle.json 也提交一份做审计/回退（CI/CD 已经 paths-ignore 这个文件，不会触发部署）
       - name: Commit bundle.json (audit trail)
