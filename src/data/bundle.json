@@ -124,6 +124,18 @@
       "imageUrl": "https://bbs.hycdn.cn/image/2025/12/13/179550/e87e7164507ab8320f55a37d9cd0b912.png"
     },
     {
+      "id": "g124",
+      "name": "使命必达",
+      "rarity": 6,
+      "weaponClass": "施术单元",
+      "ideal": {
+        "base": "意志提升",
+        "add": "终结技效率提升",
+        "skill": "追袭"
+      },
+      "imageUrl": "https://bbs.hycdn.cn/image/2025/12/13/179550/33f54d8479db132681da1a26e789e5e4.png"
+    },
+    {
       "id": "g70",
       "name": "熔铸火焰",
       "rarity": 6,
@@ -184,6 +196,30 @@
       "imageUrl": "https://bbs.hycdn.cn/image/2025/12/13/179550/869d470dc10a2af0e6a621b39d3b3ab1.png"
     },
     {
+      "id": "g128",
+      "name": "遗忘",
+      "rarity": 6,
+      "weaponClass": "施术单元",
+      "ideal": {
+        "base": "智识提升",
+        "add": "法术伤害提升",
+        "skill": "夜幕"
+      },
+      "imageUrl": "https://bbs.hycdn.cn/image/2025/12/13/179550/edd2eec2a1f0d2013ea19b46c7071e77.png"
+    },
+    {
+      "id": "g127",
+      "name": "爆破单元",
+      "rarity": 6,
+      "weaponClass": "施术单元",
+      "ideal": {
+        "base": "主能力提升",
+        "add": "源石技艺提升",
+        "skill": "迸发"
+      },
+      "imageUrl": "https://bbs.hycdn.cn/image/2025/12/13/179550/7a7e262d7b9c9dbebc425f814652e523.png"
+    },
+    {
       "id": "g125",
       "name": "沧溟星梦",
       "rarity": 6,
@@ -194,6 +230,18 @@
         "skill": "附术"
       },
       "imageUrl": "https://bbs.hycdn.cn/image/2025/12/13/179550/c5954f91e2fa0bbd04313be756397517.png"
+    },
+    {
+      "id": "g115",
+      "name": "同类相食",
+      "rarity": 6,
+      "weaponClass": "手铳",
+      "ideal": {
+        "base": "主能力提升",
+        "add": "法术伤害提升",
+        "skill": "附术"
+      },
+      "imageUrl": "https://bbs.hycdn.cn/image/2025/12/13/179550/2e6153849394395e153c89865f218865.png"
     },
     {
       "id": "g114",
@@ -244,6 +292,18 @@
       "imageUrl": "https://bbs.hycdn.cn/image/2025/12/13/179550/d5503c032da62c81e59174a211fc4b8a.png"
     },
     {
+      "id": "g96",
+      "name": "破碎君王",
+      "rarity": 6,
+      "weaponClass": "双手剑",
+      "ideal": {
+        "base": "力量提升",
+        "add": "暴击率提升",
+        "skill": "粉碎"
+      },
+      "imageUrl": "https://bbs.hycdn.cn/image/2025/12/13/179550/feaae1e0d1db1d53431c658fbafcd274.png"
+    },
+    {
       "id": "g86",
       "name": "昔日精品",
       "rarity": 6,
@@ -290,6 +350,18 @@
         "skill": "医疗"
       },
       "imageUrl": "https://bbs.hycdn.cn/image/2025/12/13/179550/1387fa14d4f6b3f85b1225aaa7579f5b.png"
+    },
+    {
+      "id": "g75",
+      "name": "白夜新星",
+      "rarity": 6,
+      "weaponClass": "单手剑",
+      "ideal": {
+        "base": "主能力提升",
+        "add": "源石技艺提升",
+        "skill": "附术"
+      },
+      "imageUrl": "https://bbs.hycdn.cn/image/2025/12/13/179550/d02d5b2db466fabbf7af4b50e3bd8193.png"
     },
     {
       "id": "g74",
@@ -352,6 +424,18 @@
       "imageUrl": "https://bbs.hycdn.cn/image/2025/12/15/4898765/10a946a1f8349176f208d5c63789d6b2.png"
     },
     {
+      "id": "g123",
+      "name": "O.B.J.术识",
+      "rarity": 5,
+      "weaponClass": "施术单元",
+      "ideal": {
+        "base": "智识提升",
+        "add": "源石技艺提升",
+        "skill": "追袭"
+      },
+      "imageUrl": "https://bbs.hycdn.cn/image/2025/12/19/4898765/3e9952da09935cc8e6b2adc333dd6b38.png"
+    },
+    {
       "id": "g122",
       "name": "布道自由",
       "rarity": 5,
@@ -374,6 +458,18 @@
         "skill": "附术"
       },
       "imageUrl": "https://bbs.hycdn.cn/image/2025/12/19/4898765/c9d2120f86a877cfd098d5368b567e9b.png"
+    },
+    {
+      "id": "g120",
+      "name": "莫奈何",
+      "rarity": 5,
+      "weaponClass": "施术单元",
+      "ideal": {
+        "base": "意志提升",
+        "add": "终结技效率提升",
+        "skill": "昂扬"
+      },
+      "imageUrl": "https://bbs.hycdn.cn/image/2025/12/19/4898765/d88adfb9abbbd0bb2dc4f8cc5f6081ec.png"
     },
     {
       "id": "g119",
@@ -400,6 +496,30 @@
       "imageUrl": "https://bbs.hycdn.cn/image/2025/12/13/179550/e4b151edf9b587ac9a3b75f979b7f488.png"
     },
     {
+      "id": "g110",
+      "name": "O.B.J.迅极",
+      "rarity": 5,
+      "weaponClass": "手铳",
+      "ideal": {
+        "base": "敏捷提升",
+        "add": "终结技效率提升",
+        "skill": "迸发"
+      },
+      "imageUrl": "https://bbs.hycdn.cn/image/2025/12/13/179550/8033f06c27cea64f753f91457adc6274.png"
+    },
+    {
+      "id": "g109",
+      "name": "作品：众生",
+      "rarity": 5,
+      "weaponClass": "手铳",
+      "ideal": {
+        "base": "敏捷提升",
+        "add": "法术伤害提升",
+        "skill": "附术"
+      },
+      "imageUrl": "https://bbs.hycdn.cn/image/2025/12/13/179550/ee94bf8af3a6a5ec650a9080501772e4.png"
+    },
+    {
       "id": "g102",
       "name": "向心之引",
       "rarity": 5,
@@ -410,6 +530,30 @@
         "skill": "压制"
       },
       "imageUrl": "https://bbs.hycdn.cn/image/2025/12/13/179550/cfc5f22138e0ee0af9047e7d05be42b3.png"
+    },
+    {
+      "id": "g101",
+      "name": "O.B.J.尖峰",
+      "rarity": 5,
+      "weaponClass": "长柄",
+      "ideal": {
+        "base": "意志提升",
+        "add": "物理伤害提升",
+        "skill": "附术"
+      },
+      "imageUrl": "https://bbs.hycdn.cn/image/2025/12/13/179550/8ffe428d0400cb3d78ec691757a1837e.png"
+    },
+    {
+      "id": "g100",
+      "name": "嵌合正义",
+      "rarity": 5,
+      "weaponClass": "长柄",
+      "ideal": {
+        "base": "力量提升",
+        "add": "终结技效率提升",
+        "skill": "残暴"
+      },
+      "imageUrl": "https://bbs.hycdn.cn/image/2025/12/13/179550/663ce7b26f57febda19b97c95dfa014e.png"
     },
     {
       "id": "g82",
@@ -436,6 +580,30 @@
       "imageUrl": "https://bbs.hycdn.cn/image/2025/12/13/179550/cb0a7a607ef53fb880b4a02038cf3a54.png"
     },
     {
+      "id": "g80",
+      "name": "古渠",
+      "rarity": 5,
+      "weaponClass": "双手剑",
+      "ideal": {
+        "base": "力量提升",
+        "add": "源石技艺提升",
+        "skill": "残暴"
+      },
+      "imageUrl": "https://bbs.hycdn.cn/image/2025/12/13/179550/3c890c82d1a43d843ba135d08e603323.png"
+    },
+    {
+      "id": "g79",
+      "name": "探骊",
+      "rarity": 5,
+      "weaponClass": "双手剑",
+      "ideal": {
+        "base": "力量提升",
+        "add": "终结技效率提升",
+        "skill": "迸发"
+      },
+      "imageUrl": "https://bbs.hycdn.cn/image/2025/12/13/179550/f59210444eae33336b43b8648964dca3.png"
+    },
+    {
       "id": "g66",
       "name": "仰止",
       "rarity": 5,
@@ -460,6 +628,18 @@
       "imageUrl": "https://bbs.hycdn.cn/image/2025/12/14/4898765/25627c57e5593628b2bcd2dce02d41b6.png"
     },
     {
+      "id": "g64",
+      "name": "十二问",
+      "rarity": 5,
+      "weaponClass": "单手剑",
+      "ideal": {
+        "base": "敏捷提升",
+        "add": "攻击提升",
+        "skill": "附术"
+      },
+      "imageUrl": "https://bbs.hycdn.cn/image/2025/12/14/4898765/799ee937d99ec7c66752b765bd7c839c.png"
+    },
+    {
       "id": "g63",
       "name": "逐鳞3.0",
       "rarity": 5,
@@ -470,6 +650,18 @@
         "skill": "压制"
       },
       "imageUrl": "https://bbs.hycdn.cn/image/2025/12/14/4898765/848ff520db2f682bf91e2ff1216c88cc.png"
+    },
+    {
+      "id": "g62",
+      "name": "坚城铸造者",
+      "rarity": 5,
+      "weaponClass": "单手剑",
+      "ideal": {
+        "base": "智识提升",
+        "add": "终结技效率提升",
+        "skill": "昂扬"
+      },
+      "imageUrl": "https://bbs.hycdn.cn/image/2025/12/14/4898765/0c6c8757a1ad4e75db4bf98810c8868a.png"
     },
     {
       "id": "g61",
@@ -496,6 +688,30 @@
       "imageUrl": "https://bbs.hycdn.cn/image/2025/12/17/4898765/9101ca1d3f6ea9d0f4cce34f6b830e19.png"
     },
     {
+      "id": "g117",
+      "name": "全自动骇新星",
+      "rarity": 4,
+      "weaponClass": "施术单元",
+      "ideal": {
+        "base": "智识提升",
+        "add": "法术伤害提升",
+        "skill": "昂扬"
+      },
+      "imageUrl": "https://bbs.hycdn.cn/image/2025/12/17/4898765/6f72e3063a098775f233d853c17361a2.png"
+    },
+    {
+      "id": "g108",
+      "name": "长路",
+      "rarity": 4,
+      "weaponClass": "手铳",
+      "ideal": {
+        "base": "力量提升",
+        "add": "法术伤害提升",
+        "skill": "追袭"
+      },
+      "imageUrl": "https://bbs.hycdn.cn/image/2025/12/13/179550/74149856728ce1495a978ae88c3579c6.png"
+    },
+    {
       "id": "g107",
       "name": "呼啸守卫",
       "rarity": 4,
@@ -506,6 +722,18 @@
         "skill": "压制"
       },
       "imageUrl": "https://bbs.hycdn.cn/image/2025/12/13/179550/4159592c35d1926d3744134927c11937.png"
+    },
+    {
+      "id": "g99",
+      "name": "天使杀手",
+      "rarity": 4,
+      "weaponClass": "长柄",
+      "ideal": {
+        "base": "意志提升",
+        "add": "法术伤害提升",
+        "skill": "压制"
+      },
+      "imageUrl": "https://bbs.hycdn.cn/image/2025/12/18/4898765/de8ba4be712c2ef44a49d770d4f3ba14.png"
     },
     {
       "id": "g98",
@@ -594,7 +822,6 @@
         "医疗",
         "附术",
         "巧技",
-        "昂扬",
         "追袭",
         "压制"
       ]
@@ -624,7 +851,6 @@
         "夜幕",
         "附术",
         "残暴",
-        "昂扬",
         "追袭",
         "强攻"
       ]
@@ -639,7 +865,6 @@
         "医疗",
         "附术",
         "残暴",
-        "昂扬",
         "粉碎",
         "追袭"
       ]
@@ -669,7 +894,6 @@
         "切骨",
         "医疗",
         "巧技",
-        "昂扬",
         "粉碎",
         "压制"
       ]

@@ -24,6 +24,21 @@ const SKILL_WIDGET = "技能详情";
 const WEAPON_CLASS_TAG_ID = "10223";
 
 /**
+ * 武器面板的属性显示名 ↔ 基质池规范名的映射。
+ * 同一个底层属性在两边的 wiki UI 用了不同字眼，统一到基质池命名。
+ */
+const ATTR_ALIASES: Record<string, string> = {
+  法术提升: "法术伤害提升",
+  源石技艺强度提升: "源石技艺提升",
+  终结技充能效率提升: "终结技效率提升",
+};
+
+function canonicalize(name: string): string {
+  const trimmed = name.trim();
+  return ATTR_ALIASES[trimmed] ?? trimmed;
+}
+
+/**
  * 武器的三件套词条直接来自 widget "技能详情" 的 3 个 tab title：
  *   tab[0].title = "<base>·大"
  *   tab[1].title = "<add>·大"
@@ -42,13 +57,19 @@ export function parseWeapon(
   const tabs = getWidgetTabs(item, widget.id);
   if (tabs.length < 3) return null;
 
-  const stripSuffix = (t: string) => t.replace(/·(?:大|中|小)\s*$/, "");
-  const baseRaw = stripSuffix(tabs[0].title);
-  const addRaw = stripSuffix(tabs[1].title);
-  const skillRaw = tabs[2].title.split(/[・·]/)[0];
+  const stripSuffix = (t: string) => t.trim().replace(/·(?:大|中|小)\s*$/, "");
+  const baseRaw = canonicalize(stripSuffix(tabs[0].title));
+  const addRaw = canonicalize(stripSuffix(tabs[1].title));
+  const skillRaw = canonicalize(tabs[2].title.split(/[・·]/)[0]);
 
-  if (!BASE_NAMES.includes(baseRaw)) return null;
-  if (!ADD_NAMES.includes(addRaw)) return null;
+  if (!BASE_NAMES.includes(baseRaw)) {
+    console.warn(`  ! ${name}: unknown base "${baseRaw}"`);
+    return null;
+  }
+  if (!ADD_NAMES.includes(addRaw)) {
+    console.warn(`  ! ${name}: unknown add "${addRaw}"`);
+    return null;
+  }
   if (!skillRaw) return null;
 
   const weaponClass = resolveWeaponClass(item, catalogItem);
