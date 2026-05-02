@@ -14,3 +14,9 @@ binding = "ASSETS"
 [[kv_namespaces]]
 binding = "DATA"
 id = "fc8d93721baa466680d1dac68f63a9fd"
+
+# 以下 secrets 通过 `wrangler secret put <NAME>` 配置：
+#   GITHUB_CLIENT_ID       — GitHub OAuth App client id
+#   GITHUB_CLIENT_SECRET   — GitHub OAuth App client secret
+#   SESSION_SECRET         — 任意长随机串（HMAC 签 cookie 用）
+#   ALLOWED_GITHUB_USER    — 允许进入 admin 的 GitHub login，逗号分隔多账号

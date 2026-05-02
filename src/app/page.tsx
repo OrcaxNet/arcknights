@@ -127,12 +127,18 @@ export default function Home() {
         pages={[page1, page2]}
       />
 
-      <footer className="mt-2 flex items-center gap-2 border-t border-line pt-3 font-mono-tech text-[9.5px] tracking-[0.22em] text-[var(--mute)]">
+      <footer className="mt-2 flex flex-wrap items-center gap-x-2 gap-y-1 border-t border-line pt-3 font-mono-tech text-[9.5px] tracking-[0.22em] text-[var(--mute)]">
         <span className="stripe-warn block h-[10px] w-12" />
         <span className="text-[var(--ink-2)]">POWERED BY</span>
         <span className="font-display text-[12px] tracking-[0.04em] text-[var(--ink)]">
           ENDFIELD ANALYSIS OS
         </span>
+        <a
+          href="/admin/"
+          className="ml-2 text-[var(--mute)] hover:text-[var(--orange)] transition-colors"
+        >
+          [ OPS ]
+        </a>
         <span className="ml-auto">
           DATA: {source === "kv" ? "LIVE/KV" : "BAKED"}
           {fetchedAt && source === "kv"
