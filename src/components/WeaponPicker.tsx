@@ -134,26 +134,33 @@ function WeaponCard({
     <button
       type="button"
       onClick={onClick}
-      className={`flex flex-col items-start gap-1 rounded-lg border p-2 text-left transition-colors active:scale-[0.98] ${
+      className={`relative flex flex-col items-start gap-1 overflow-hidden rounded-lg border p-2 text-left transition-colors active:scale-[0.98] ${
         selected
           ? "border-amber-400 bg-amber-400/10"
           : "border-zinc-800 bg-zinc-900 hover:border-zinc-600"
       }`}
     >
-      <div className="flex w-full items-center justify-between">
+      {weapon.imageUrl && (
+        <img
+          src={weapon.imageUrl}
+          alt=""
+          loading="lazy"
+          referrerPolicy="no-referrer"
+          className="pointer-events-none absolute -right-3 top-1 h-20 w-20 object-contain opacity-30"
+        />
+      )}
+      <div className="relative z-10 flex w-full items-center justify-between">
         <RarityStars rarity={weapon.rarity} />
-        {selected && (
-          <span className="text-xs text-amber-400">✓</span>
-        )}
+        {selected && <span className="text-xs text-amber-400">✓</span>}
       </div>
-      <div className="font-medium text-zinc-100 text-sm leading-tight">
+      <div className="relative z-10 font-medium text-zinc-100 text-sm leading-tight">
         {weapon.name}
       </div>
-      <div className="text-[11px] text-zinc-500">
+      <div className="relative z-10 text-[11px] text-zinc-500">
         {weapon.weaponClass}
         {weapon.operator ? ` · ${weapon.operator}` : ""}
       </div>
-      <div className="mt-1 flex flex-wrap gap-1 text-[10px]">
+      <div className="relative z-10 mt-1 flex flex-wrap gap-1 text-[10px]">
         <Tag color="base">{weapon.ideal.base}</Tag>
         <Tag color="add">{weapon.ideal.add}</Tag>
         <Tag color="skill">{weapon.ideal.skill}</Tag>

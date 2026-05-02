@@ -42,9 +42,18 @@ export function SelectedWeapons({ selectedIds, onRemove, onClear }: Props) {
               key={w.id}
               className="flex items-center gap-2 rounded-md border border-zinc-800 bg-zinc-900/50 px-2 py-1.5 text-sm"
             >
+              {w.imageUrl && (
+                <img
+                  src={w.imageUrl}
+                  alt=""
+                  loading="lazy"
+                  referrerPolicy="no-referrer"
+                  className="h-7 w-7 shrink-0 object-contain"
+                />
+              )}
               <RarityStars rarity={w.rarity} />
               <span className="font-medium text-zinc-100">{w.name}</span>
-              <span className="text-[11px] text-zinc-500">
+              <span className="hidden text-[11px] text-zinc-500 sm:inline">
                 {w.ideal.base}·{w.ideal.add}·{w.ideal.skill}
               </span>
               <button
