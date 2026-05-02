@@ -1,12 +1,289 @@
 @import "tailwindcss";
 
 @theme inline {
+  --font-mono: var(--font-jetbrains-mono);
   --font-sans: var(--font-geist-sans);
-  --font-mono: var(--font-geist-mono);
+}
+
+:root {
+  /* Endfield Industries — internal terminal palette */
+  --bg: #0a0907;
+  --bg-1: #0f0d0a;
+  --bg-2: #181510;
+  --bg-3: #221d16;
+  --line: #2e281f;
+  --line-bright: #4a4030;
+
+  --ink: #f3ecdb;
+  --ink-2: #c8bfa9;
+  --mute: #807666;
+  --mute-2: #56503f;
+
+  --orange: #ff7a18;
+  --orange-soft: #ffaa55;
+  --orange-deep: #c2500e;
+  --orange-glow: rgba(255, 122, 24, 0.18);
+
+  --teal: #5ed8d8;
+  --acid: #c8d447;
 }
 
 html,
 body {
-  font-family: var(--font-sans, system-ui, -apple-system, "PingFang SC", "Hiragino Sans GB",
-    "Microsoft YaHei", sans-serif);
+  background: var(--bg);
+  color: var(--ink);
+  font-family: var(--font-sans), system-ui, -apple-system, "PingFang SC",
+    "Hiragino Sans GB", "Microsoft YaHei", sans-serif;
+  font-feature-settings: "ss01" on, "cv11" on;
+  letter-spacing: 0.005em;
+}
+
+::selection {
+  background: var(--orange);
+  color: #0a0907;
+}
+
+/* ───────────── ambient grain + scanlines (fixed overlay) ───────────── */
+
+body::before {
+  content: "";
+  position: fixed;
+  inset: 0;
+  pointer-events: none;
+  z-index: 1;
+  background-image:
+    repeating-linear-gradient(
+      0deg,
+      rgba(255, 255, 255, 0.018) 0,
+      rgba(255, 255, 255, 0.018) 1px,
+      transparent 1px,
+      transparent 3px
+    );
+  mix-blend-mode: overlay;
+  opacity: 0.55;
+}
+
+body::after {
+  content: "";
+  position: fixed;
+  inset: 0;
+  pointer-events: none;
+  z-index: 2;
+  background-image: radial-gradient(
+      ellipse 120% 80% at 50% 0%,
+      transparent 30%,
+      rgba(0, 0, 0, 0.55) 100%
+    ),
+    url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='160' height='160'><filter id='n'><feTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='2' stitchTiles='stitch'/><feColorMatrix values='0 0 0 0 0  0 0 0 0 0  0 0 0 0 0  0 0 0 0.6 0'/></filter><rect width='100%' height='100%' filter='url(%23n)' opacity='0.25'/></svg>");
+  opacity: 0.4;
+  mix-blend-mode: overlay;
+}
+
+/* ───────────── reusable utility classes ───────────── */
+
+@layer utilities {
+  .font-display {
+    font-family: var(--font-display), var(--font-sans), sans-serif;
+    font-weight: 800;
+    letter-spacing: 0.02em;
+    text-transform: uppercase;
+  }
+  .font-mono-tech {
+    font-family: var(--font-mono), monospace;
+    font-feature-settings: "ss01" on, "tnum" on;
+  }
+  .sect-label {
+    font-family: var(--font-mono), monospace;
+    font-size: 10px;
+    letter-spacing: 0.22em;
+    text-transform: uppercase;
+    color: var(--mute);
+  }
+  .sect-label-strong {
+    font-family: var(--font-mono), monospace;
+    font-size: 11px;
+    font-weight: 600;
+    letter-spacing: 0.18em;
+    text-transform: uppercase;
+    color: var(--ink);
+  }
+  .hairline {
+    border-color: var(--line);
+  }
+  .ink-bar {
+    background: var(--ink);
+    color: var(--bg);
+  }
+  .text-mute {
+    color: var(--mute);
+  }
+  .text-ink-2 {
+    color: var(--ink-2);
+  }
+  .bg-paper {
+    background: var(--bg-1);
+  }
+  .bg-paper-2 {
+    background: var(--bg-2);
+  }
+  .border-line {
+    border-color: var(--line);
+  }
+  .border-line-bright {
+    border-color: var(--line-bright);
+  }
+  .text-orange {
+    color: var(--orange);
+  }
+  .bg-orange {
+    background: var(--orange);
+  }
+  .border-orange {
+    border-color: var(--orange);
+  }
+}
+
+/* corner-bracket frame ─ used on cards/sections to evoke target reticles */
+.frame-corners {
+  position: relative;
+}
+.frame-corners::before,
+.frame-corners::after {
+  content: "";
+  position: absolute;
+  width: 10px;
+  height: 10px;
+  border-color: var(--ink);
+  border-style: solid;
+  pointer-events: none;
+  transition: all 220ms ease;
+}
+.frame-corners::before {
+  top: -1px;
+  left: -1px;
+  border-width: 1px 0 0 1px;
+}
+.frame-corners::after {
+  bottom: -1px;
+  right: -1px;
+  border-width: 0 1px 1px 0;
+}
+.frame-corners.is-accent::before,
+.frame-corners.is-accent::after {
+  border-color: var(--orange);
+  width: 14px;
+  height: 14px;
+}
+
+/* connection line ─ from a label to the thing it labels */
+.conn-line {
+  position: relative;
+}
+.conn-line::before {
+  content: "";
+  position: absolute;
+  top: 50%;
+  left: -16px;
+  width: 12px;
+  height: 1px;
+  background: currentColor;
+  opacity: 0.6;
+}
+
+/* classified stripe ─ horizontal hatched warning bar */
+.stripe-warn {
+  background-image: repeating-linear-gradient(
+    -45deg,
+    var(--orange) 0,
+    var(--orange) 6px,
+    var(--bg) 6px,
+    var(--bg) 12px
+  );
+}
+
+/* glitch sweep on hover */
+@keyframes sweep {
+  0% {
+    transform: translateX(-110%);
+  }
+  100% {
+    transform: translateX(110%);
+  }
+}
+.hover-sweep {
+  position: relative;
+  overflow: hidden;
+}
+.hover-sweep::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(
+    100deg,
+    transparent 40%,
+    var(--orange-glow) 50%,
+    transparent 60%
+  );
+  transform: translateX(-110%);
+  pointer-events: none;
+  transition: opacity 200ms;
+  opacity: 0;
+}
+.hover-sweep:hover::after,
+.hover-sweep:focus-visible::after {
+  animation: sweep 700ms ease-out forwards;
+  opacity: 1;
+}
+
+/* fade-up reveal */
+@keyframes fadeUp {
+  from {
+    opacity: 0;
+    transform: translateY(6px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+.reveal {
+  animation: fadeUp 380ms ease-out both;
+}
+
+/* select-pulse: when a card becomes selected */
+@keyframes selectPulse {
+  0% {
+    box-shadow: 0 0 0 0 var(--orange-glow);
+  }
+  100% {
+    box-shadow: 0 0 0 14px transparent;
+  }
+}
+.select-pulse {
+  animation: selectPulse 600ms ease-out;
+}
+
+/* slow ambient scan line moving down the page */
+@keyframes scanDown {
+  0% {
+    transform: translateY(-100vh);
+  }
+  100% {
+    transform: translateY(100vh);
+  }
+}
+.scan-line-fixed {
+  position: fixed;
+  left: 0;
+  right: 0;
+  height: 2px;
+  background: linear-gradient(
+    to bottom,
+    transparent,
+    rgba(255, 122, 24, 0.18),
+    transparent
+  );
+  pointer-events: none;
+  z-index: 3;
+  animation: scanDown 12s linear infinite;
 }

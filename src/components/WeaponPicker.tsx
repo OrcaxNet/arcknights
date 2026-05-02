@@ -38,34 +38,38 @@ export function WeaponPicker({ selectedIds, onToggle }: Props) {
 
   return (
     <section className="flex flex-col gap-3">
-      <div className="flex flex-col gap-2">
-        <input
-          type="search"
-          placeholder="搜索武器/干员"
-          value={query}
-          onChange={(e) => setQuery(e.target.value)}
-          className="w-full rounded-lg border border-zinc-700 bg-zinc-900 px-3 py-2 text-sm text-zinc-100 placeholder:text-zinc-500 focus:border-amber-400 focus:outline-none"
-        />
-        <div className="flex gap-2 overflow-x-auto pb-1">
+      <div className="flex flex-col gap-2.5">
+        <label className="relative block">
+          <span className="absolute left-2.5 top-1/2 -translate-y-1/2 font-mono-tech text-[10px] tracking-[0.22em] text-[var(--mute)] pointer-events-none">
+            QUERY //
+          </span>
+          <input
+            type="search"
+            placeholder="搜索武器 / 干员"
+            value={query}
+            onChange={(e) => setQuery(e.target.value)}
+            className="w-full bg-paper-2 border border-line focus:border-orange focus:outline-none focus:ring-1 focus:ring-[var(--orange-glow)] py-2 pl-[72px] pr-3 text-sm text-[var(--ink)] placeholder:text-[var(--mute)] transition-colors"
+          />
+        </label>
+        <div className="flex gap-1.5 overflow-x-auto pb-1 -mx-1 px-1">
           <FilterPill
             active={rarityFilter === "all"}
             onClick={() => setRarityFilter("all")}
-            label="全部稀有度"
+            label="ALL"
           />
           {RARITIES.map((r) => (
             <FilterPill
               key={r}
               active={rarityFilter === r}
               onClick={() => setRarityFilter(r)}
-              label={`${r}★`}
+              label={`R/${r}`}
             />
           ))}
-        </div>
-        <div className="flex gap-2 overflow-x-auto pb-1">
+          <span className="mx-1 my-auto h-3 w-px bg-[var(--line-bright)]" />
           <FilterPill
             active={classFilter === "all"}
             onClick={() => setClassFilter("all")}
-            label="全部类型"
+            label="所有类型"
           />
           {CLASSES.map((c) => (
             <FilterPill
@@ -79,17 +83,18 @@ export function WeaponPicker({ selectedIds, onToggle }: Props) {
       </div>
 
       <div className="grid grid-cols-2 gap-2 sm:grid-cols-3 md:grid-cols-4">
-        {list.map((w) => (
+        {list.map((w, i) => (
           <WeaponCard
             key={w.id}
             weapon={w}
             selected={selectedIds.has(w.id)}
             onClick={() => onToggle(w.id)}
+            indexLabel={String(i + 1).padStart(3, "0")}
           />
         ))}
         {list.length === 0 && (
-          <div className="col-span-full py-12 text-center text-sm text-zinc-500">
-            没有匹配的武器
+          <div className="col-span-full py-12 text-center sect-label">
+            // NO MATCH —
           </div>
         )}
       </div>
@@ -110,10 +115,10 @@ function FilterPill({
     <button
       type="button"
       onClick={onClick}
-      className={`shrink-0 rounded-full border px-3 py-1 text-xs transition-colors ${
+      className={`shrink-0 border px-2.5 h-7 inline-flex items-center text-[10px] font-mono-tech tracking-[0.16em] uppercase transition-colors ${
         active
-          ? "border-amber-400 bg-amber-400/10 text-amber-300"
-          : "border-zinc-700 text-zinc-400 hover:border-zinc-500"
+          ? "border-orange bg-[var(--orange)] text-[var(--bg)]"
+          : "border-line text-[var(--ink-2)] hover:border-[var(--line-bright)] hover:text-[var(--ink)]"
       }`}
     >
       {label}
@@ -125,64 +130,94 @@ function WeaponCard({
   weapon,
   selected,
   onClick,
+  indexLabel,
 }: {
   weapon: Weapon;
   selected: boolean;
   onClick: () => void;
+  indexLabel: string;
 }) {
   return (
     <button
       type="button"
       onClick={onClick}
-      className={`relative flex flex-col items-start gap-1 overflow-hidden rounded-lg border p-2 text-left transition-colors active:scale-[0.98] ${
+      data-selected={selected || undefined}
+      className={`group hover-sweep frame-corners ${
+        selected ? "is-accent" : ""
+      } relative flex flex-col items-start gap-1 overflow-hidden border bg-paper-2 px-2 py-2 text-left transition-colors active:scale-[0.985]
+      ${
         selected
-          ? "border-amber-400 bg-amber-400/10"
-          : "border-zinc-800 bg-zinc-900 hover:border-zinc-600"
+          ? "border-orange"
+          : "border-line hover:border-[var(--line-bright)]"
       }`}
     >
+      {/* image bg, half-tone-ish via opacity + grayscale on idle */}
       {weapon.imageUrl && (
         <img
           src={weapon.imageUrl}
           alt=""
           loading="lazy"
           referrerPolicy="no-referrer"
-          className="pointer-events-none absolute -right-3 top-1 h-20 w-20 object-contain opacity-30"
+          className={`pointer-events-none absolute -right-3 top-0 h-24 w-24 object-contain transition-all duration-300 ${
+            selected
+              ? "opacity-50"
+              : "opacity-30 grayscale group-hover:opacity-45 group-hover:grayscale-0"
+          }`}
         />
       )}
+
+      {/* top row: index + rarity */}
       <div className="relative z-10 flex w-full items-center justify-between">
+        <span className="font-mono-tech text-[9px] tracking-[0.18em] text-[var(--mute)]">
+          NO.{indexLabel}
+        </span>
         <RarityStars rarity={weapon.rarity} />
-        {selected && <span className="text-xs text-amber-400">✓</span>}
       </div>
-      <div className="relative z-10 font-medium text-zinc-100 text-sm leading-tight">
+
+      {/* name */}
+      <div className="relative z-10 mt-0.5 font-display text-base leading-none text-[var(--ink)]">
         {weapon.name}
       </div>
-      <div className="relative z-10 text-[11px] text-zinc-500">
+
+      {/* sub */}
+      <div className="relative z-10 font-mono-tech text-[10px] tracking-[0.12em] text-[var(--mute)]">
         {weapon.weaponClass}
         {weapon.operator ? ` · ${weapon.operator}` : ""}
       </div>
-      <div className="relative z-10 mt-1 flex flex-wrap gap-1 text-[10px]">
-        <Tag color="base">{weapon.ideal.base}</Tag>
-        <Tag color="add">{weapon.ideal.add}</Tag>
-        <Tag color="skill">{weapon.ideal.skill}</Tag>
+
+      {/* attribute chips */}
+      <div className="relative z-10 mt-1 flex flex-wrap gap-1">
+        <Tag kind="base">{weapon.ideal.base}</Tag>
+        <Tag kind="add">{weapon.ideal.add}</Tag>
+        <Tag kind="skill">{weapon.ideal.skill}</Tag>
       </div>
+
+      {/* selected indicator */}
+      {selected && (
+        <span className="absolute right-1.5 top-1.5 z-10 h-1.5 w-1.5 bg-orange shadow-[0_0_8px_var(--orange)]" />
+      )}
     </button>
   );
 }
 
 function Tag({
-  color,
+  kind,
   children,
 }: {
-  color: "base" | "add" | "skill";
+  kind: "base" | "add" | "skill";
   children: React.ReactNode;
 }) {
-  const cls =
-    color === "base"
-      ? "bg-sky-500/20 text-sky-300"
-      : color === "add"
-      ? "bg-emerald-500/20 text-emerald-300"
-      : "bg-fuchsia-500/20 text-fuchsia-300";
+  const tone =
+    kind === "base"
+      ? "border-[#3a534f] text-[var(--teal)]"
+      : kind === "add"
+      ? "border-[#4f4d28] text-[var(--acid)]"
+      : "border-[#5e3a14] text-[var(--orange-soft)]";
   return (
-    <span className={`rounded px-1.5 py-0.5 ${cls}`}>{children}</span>
+    <span
+      className={`inline-flex items-center border px-1 h-[16px] text-[9.5px] font-mono-tech tracking-[0.06em] ${tone}`}
+    >
+      {children}
+    </span>
   );
 }

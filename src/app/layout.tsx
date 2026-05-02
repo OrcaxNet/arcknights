@@ -1,5 +1,5 @@
 import type { Metadata } from "next";
-import { Geist, Geist_Mono } from "next/font/google";
+import { Geist, JetBrains_Mono, Saira } from "next/font/google";
 import "./globals.css";
 
 const geistSans = Geist({
@@ -7,14 +7,22 @@ const geistSans = Geist({
   subsets: ["latin"],
 });
 
-const geistMono = Geist_Mono({
-  variable: "--font-geist-mono",
+const jetbrainsMono = JetBrains_Mono({
+  variable: "--font-jetbrains-mono",
   subsets: ["latin"],
+  weight: ["400", "500", "700"],
+});
+
+const display = Saira({
+  variable: "--font-display",
+  subsets: ["latin"],
+  weight: ["600", "800", "900"],
 });
 
 export const metadata: Metadata = {
-  title: "终末地·基质刷取计算器",
-  description: "为《明日方舟：终末地》多件武器同时刷取基质，推荐最优能量淤积点和锁定词条组合。",
+  title: "终末地·基质刷取计算器 / ENDFIELD",
+  description:
+    "为《明日方舟：终末地》多件武器同时刷取基质，推荐最优能量淤积点和锁定词条组合。",
 };
 
 export const viewport = {
@@ -31,9 +39,10 @@ export default function RootLayout({
   return (
     <html
       lang="zh-CN"
-      className={`${geistSans.variable} ${geistMono.variable} h-full antialiased`}
+      className={`${geistSans.variable} ${jetbrainsMono.variable} ${display.variable} h-full antialiased`}
     >
-      <body className="min-h-full flex flex-col bg-zinc-950 text-zinc-100">
+      <body className="relative min-h-full flex flex-col">
+        <div className="scan-line-fixed" aria-hidden />
         {children}
       </body>
     </html>
