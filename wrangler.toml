@@ -10,6 +10,8 @@ routes = [
 directory = "./out"
 not_found_handling = "single-page-application"
 binding = "ASSETS"
+# /api/* 始终走 Worker（避免 SPA fallback 把 API 路径吃掉）
+run_worker_first = ["/api/*"]
 
 [[kv_namespaces]]
 binding = "DATA"
