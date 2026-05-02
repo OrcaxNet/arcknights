@@ -14,9 +14,11 @@ import { DataBundleSchema, validateBundle, type DataBundle } from "../src/data/s
 import { fetchCatalog, fetchItem } from "./lib/skland-api";
 import { parseSubstrate, type SubstrateInfo } from "./lib/parse-substrate";
 import { parseWeapon, type WeaponInfo } from "./lib/parse-weapon";
+import { mirrorImage } from "./lib/image-mirror";
 
 const __dirname = path.dirname(fileURLToPath(import.meta.url));
-const BUNDLE_PATH = path.resolve(__dirname, "../src/data/bundle.json");
+const REPO_ROOT = path.resolve(__dirname, "..");
+const BUNDLE_PATH = path.resolve(REPO_ROOT, "src/data/bundle.json");
 
 interface CliArgs {
   dryRun: boolean;
@@ -63,6 +65,13 @@ async function main() {
         const detail = await fetchItem(item.itemId);
         const parsed = parseWeapon(detail, item);
         if (parsed) {
+          if (parsed.imageUrl && parsed.imageUrl.startsWith("http")) {
+            try {
+              parsed.imageUrl = await mirrorImage(parsed.imageUrl, REPO_ROOT);
+            } catch (err) {
+              console.warn(`    image mirror failed for ${parsed.name}:`, (err as Error).message);
+            }
+          }
           weapons.push(parsed);
           console.log(`  ✓ ${item.name} (${parsed.weaponClass}) → ${parsed.ideal.base} / ${parsed.ideal.add} / ${parsed.ideal.skill}`);
         } else {

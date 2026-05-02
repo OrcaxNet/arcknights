@@ -22,7 +22,11 @@ export const WeaponSchema = z.object({
   rarity: RaritySchema,
   weaponClass: WeaponClassSchema,
   operator: z.string().optional(),
-  imageUrl: z.string().url().optional(),
+  /** 站内 /img/<filename> 或外链 https URL */
+  imageUrl: z
+    .string()
+    .refine((s) => s.startsWith("/") || /^https?:\/\//.test(s), "imageUrl must be a path or http(s) URL")
+    .optional(),
   ideal: z.object({
     base: z.string(),
     add: z.string(),

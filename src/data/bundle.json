@@ -49,7 +49,7 @@
         "add": "攻击提升",
         "skill": "压制"
       },
-      "imageUrl": "https://bbs.hycdn.cn/image/common/20260417/3644013/69e21a84fb782837ee03debb_56331367.png"
+      "imageUrl": "/img/69e21a84fb782837ee03debb_56331367.png"
     },
     {
       "id": "g1400",
@@ -61,7 +61,7 @@
         "add": "电磁伤害提升",
         "skill": "效益"
       },
-      "imageUrl": "https://bbs.hycdn.cn/image/common/20260417/3644013/69e219537c7aea6c2812078b_db193eac.png"
+      "imageUrl": "/img/69e219537c7aea6c2812078b_db193eac.png"
     },
     {
       "id": "g1177",
@@ -73,7 +73,7 @@
         "add": "暴击率提升",
         "skill": "切骨"
       },
-      "imageUrl": "https://bbs.hycdn.cn/image/common/20260330/3644013/69ca113e4298be0edf049c54_6ad0f152.png"
+      "imageUrl": "/img/69ca113e4298be0edf049c54_6ad0f152.png"
     },
     {
       "id": "g1176",
@@ -85,7 +85,7 @@
         "add": "攻击提升",
         "skill": "迸发"
       },
-      "imageUrl": "https://bbs.hycdn.cn/image/common/20260312/3644013/69b270954298be0edf043059_13673ac9.png"
+      "imageUrl": "/img/69b270954298be0edf043059_13673ac9.png"
     },
     {
       "id": "g1174",
@@ -97,7 +97,7 @@
         "add": "寒冷伤害提升",
         "skill": "压制"
       },
-      "imageUrl": "https://bbs.hycdn.cn/image/common/20260312/3644013/69b2521e45f7d92a73c82cbe_3eac6ad0.png"
+      "imageUrl": "/img/69b2521e45f7d92a73c82cbe_3eac6ad0.png"
     },
     {
       "id": "g1173",
@@ -109,7 +109,7 @@
         "add": "暴击率提升",
         "skill": "夜幕"
       },
-      "imageUrl": "https://bbs.hycdn.cn/image/common/20260312/3644013/69b25fc34298be0edf042fb9_13673ac9.png"
+      "imageUrl": "/img/69b25fc34298be0edf042fb9_13673ac9.png"
     },
     {
       "id": "g112",
@@ -121,7 +121,7 @@
         "add": "暴击率提升",
         "skill": "切骨"
       },
-      "imageUrl": "https://bbs.hycdn.cn/image/2025/12/13/179550/e87e7164507ab8320f55a37d9cd0b912.png"
+      "imageUrl": "/img/e87e7164507ab8320f55a37d9cd0b912.png"
     },
     {
       "id": "g124",
@@ -133,7 +133,7 @@
         "add": "终结技效率提升",
         "skill": "追袭"
       },
-      "imageUrl": "https://bbs.hycdn.cn/image/2025/12/13/179550/33f54d8479db132681da1a26e789e5e4.png"
+      "imageUrl": "/img/33f54d8479db132681da1a26e789e5e4.png"
     },
     {
       "id": "g70",
@@ -145,7 +145,7 @@
         "add": "攻击提升",
         "skill": "夜幕"
       },
-      "imageUrl": "https://bbs.hycdn.cn/image/2025/12/14/4898765/6dd00511c917b81b8ab861d989c38499.png"
+      "imageUrl": "/img/6dd00511c917b81b8ab861d989c38499.png"
     },
     {
       "id": "g71",
@@ -157,7 +157,7 @@
         "add": "灼热伤害提升",
         "skill": "附术"
       },
-      "imageUrl": "https://bbs.hycdn.cn/image/2025/12/12/179550/7c4e1b316266660c8007616b6489dfbf.png"
+      "imageUrl": "/img/7c4e1b316266660c8007616b6489dfbf.png"
     },
     {
       "id": "g113",
@@ -169,7 +169,7 @@
         "add": "寒冷伤害提升",
         "skill": "附术"
       },
-      "imageUrl": "https://bbs.hycdn.cn/image/2025/12/13/179550/a751ba17838d2cd68212fcbd2abef03a.png"
+      "imageUrl": "/img/a751ba17838d2cd68212fcbd2abef03a.png"
     },
     {
       "id": "g126",
@@ -181,7 +181,7 @@
         "add": "自然伤害提升",
         "skill": "压制"
       },
-      "imageUrl": "https://bbs.hycdn.cn/image/2025/12/13/179550/a5f649f205935deedc20519b2c4a01d1.png"
+      "imageUrl": "/img/a5f649f205935deedc20519b2c4a01d1.png"
     },
     {
       "id": "g129",
@@ -193,7 +193,7 @@
         "add": "生命提升",
         "skill": "医疗"
       },
-      "imageUrl": "https://bbs.hycdn.cn/image/2025/12/13/179550/869d470dc10a2af0e6a621b39d3b3ab1.png"
+      "imageUrl": "/img/869d470dc10a2af0e6a621b39d3b3ab1.png"
     },
     {
       "id": "g128",
@@ -205,7 +205,7 @@
         "add": "法术伤害提升",
         "skill": "夜幕"
       },
-      "imageUrl": "https://bbs.hycdn.cn/image/2025/12/13/179550/edd2eec2a1f0d2013ea19b46c7071e77.png"
+      "imageUrl": "/img/edd2eec2a1f0d2013ea19b46c7071e77.png"
     },
     {
       "id": "g127",
@@ -217,7 +217,7 @@
         "add": "源石技艺提升",
         "skill": "迸发"
       },
-      "imageUrl": "https://bbs.hycdn.cn/image/2025/12/13/179550/7a7e262d7b9c9dbebc425f814652e523.png"
+      "imageUrl": "/img/7a7e262d7b9c9dbebc425f814652e523.png"
     },
     {
       "id": "g125",
@@ -229,7 +229,7 @@
         "add": "治疗效率提升",
         "skill": "附术"
       },
-      "imageUrl": "https://bbs.hycdn.cn/image/2025/12/13/179550/c5954f91e2fa0bbd04313be756397517.png"
+      "imageUrl": "/img/c5954f91e2fa0bbd04313be756397517.png"
     },
     {
       "id": "g115",
@@ -241,7 +241,7 @@
         "add": "法术伤害提升",
         "skill": "附术"
       },
-      "imageUrl": "https://bbs.hycdn.cn/image/2025/12/13/179550/2e6153849394395e153c89865f218865.png"
+      "imageUrl": "/img/2e6153849394395e153c89865f218865.png"
     },
     {
       "id": "g114",
@@ -253,7 +253,7 @@
         "add": "暴击率提升",
         "skill": "附术"
       },
-      "imageUrl": "https://bbs.hycdn.cn/image/2025/12/13/179550/9d3d49afa38e95a4312ba67ee7011099.png"
+      "imageUrl": "/img/9d3d49afa38e95a4312ba67ee7011099.png"
     },
     {
       "id": "g105",
@@ -265,7 +265,7 @@
         "add": "攻击提升",
         "skill": "压制"
       },
-      "imageUrl": "https://bbs.hycdn.cn/image/2025/12/15/4898765/7e5f873680aea8908ca12bea1f88f233.png"
+      "imageUrl": "/img/7e5f873680aea8908ca12bea1f88f233.png"
     },
     {
       "id": "g104",
@@ -277,7 +277,7 @@
         "add": "物理伤害提升",
         "skill": "巧技"
       },
-      "imageUrl": "https://bbs.hycdn.cn/image/2025/12/15/4898765/e6b4da88f47fbfda7ac46bcec90983f0.png"
+      "imageUrl": "/img/e6b4da88f47fbfda7ac46bcec90983f0.png"
     },
     {
       "id": "g103",
@@ -289,7 +289,7 @@
         "add": "物理伤害提升",
         "skill": "效益"
       },
-      "imageUrl": "https://bbs.hycdn.cn/image/2025/12/13/179550/d5503c032da62c81e59174a211fc4b8a.png"
+      "imageUrl": "/img/d5503c032da62c81e59174a211fc4b8a.png"
     },
     {
       "id": "g96",
@@ -301,7 +301,7 @@
         "add": "暴击率提升",
         "skill": "粉碎"
       },
-      "imageUrl": "https://bbs.hycdn.cn/image/2025/12/13/179550/feaae1e0d1db1d53431c658fbafcd274.png"
+      "imageUrl": "/img/feaae1e0d1db1d53431c658fbafcd274.png"
     },
     {
       "id": "g86",
@@ -313,7 +313,7 @@
         "add": "生命提升",
         "skill": "效益"
       },
-      "imageUrl": "https://bbs.hycdn.cn/image/2025/12/13/179550/acd8b54f5cf3441a9841cf301b62f4c9.png"
+      "imageUrl": "/img/acd8b54f5cf3441a9841cf301b62f4c9.png"
     },
     {
       "id": "g85",
@@ -325,7 +325,7 @@
         "add": "攻击提升",
         "skill": "压制"
       },
-      "imageUrl": "https://bbs.hycdn.cn/image/2025/12/13/179550/b02d06c63dc04f7c3168692f8ee89f60.png"
+      "imageUrl": "/img/b02d06c63dc04f7c3168692f8ee89f60.png"
     },
     {
       "id": "g84",
@@ -337,7 +337,7 @@
         "add": "攻击提升",
         "skill": "迸发"
       },
-      "imageUrl": "https://bbs.hycdn.cn/image/2025/12/13/179550/8cd139e939fad8c1888e8e3257b9d738.png"
+      "imageUrl": "/img/8cd139e939fad8c1888e8e3257b9d738.png"
     },
     {
       "id": "g83",
@@ -349,7 +349,7 @@
         "add": "生命提升",
         "skill": "医疗"
       },
-      "imageUrl": "https://bbs.hycdn.cn/image/2025/12/13/179550/1387fa14d4f6b3f85b1225aaa7579f5b.png"
+      "imageUrl": "/img/1387fa14d4f6b3f85b1225aaa7579f5b.png"
     },
     {
       "id": "g75",
@@ -361,7 +361,7 @@
         "add": "源石技艺提升",
         "skill": "附术"
       },
-      "imageUrl": "https://bbs.hycdn.cn/image/2025/12/13/179550/d02d5b2db466fabbf7af4b50e3bd8193.png"
+      "imageUrl": "/img/d02d5b2db466fabbf7af4b50e3bd8193.png"
     },
     {
       "id": "g74",
@@ -373,7 +373,7 @@
         "add": "物理伤害提升",
         "skill": "残暴"
       },
-      "imageUrl": "https://bbs.hycdn.cn/image/2025/12/12/179550/16b0d5d71f64378df2c0e6b7a23a6fde.png"
+      "imageUrl": "/img/16b0d5d71f64378df2c0e6b7a23a6fde.png"
     },
     {
       "id": "g73",
@@ -385,7 +385,7 @@
         "add": "攻击提升",
         "skill": "流转"
       },
-      "imageUrl": "https://bbs.hycdn.cn/image/2025/12/12/179550/d05172004f474a38ff4c861b570751d4.png"
+      "imageUrl": "/img/d05172004f474a38ff4c861b570751d4.png"
     },
     {
       "id": "g72",
@@ -397,7 +397,7 @@
         "add": "暴击率提升",
         "skill": "夜幕"
       },
-      "imageUrl": "https://bbs.hycdn.cn/image/2025/12/12/179550/a9fc3999c4d382f13ae49c188f6af9fe.png"
+      "imageUrl": "/img/a9fc3999c4d382f13ae49c188f6af9fe.png"
     },
     {
       "id": "g68",
@@ -409,7 +409,7 @@
         "add": "攻击提升",
         "skill": "流转"
       },
-      "imageUrl": "https://bbs.hycdn.cn/image/2025/12/12/179550/534d76101624b41e6f48f2c8e88103d9.png"
+      "imageUrl": "/img/534d76101624b41e6f48f2c8e88103d9.png"
     },
     {
       "id": "g67",
@@ -421,7 +421,7 @@
         "add": "攻击提升",
         "skill": "附术"
       },
-      "imageUrl": "https://bbs.hycdn.cn/image/2025/12/15/4898765/10a946a1f8349176f208d5c63789d6b2.png"
+      "imageUrl": "/img/10a946a1f8349176f208d5c63789d6b2.png"
     },
     {
       "id": "g123",
@@ -433,7 +433,7 @@
         "add": "源石技艺提升",
         "skill": "追袭"
       },
-      "imageUrl": "https://bbs.hycdn.cn/image/2025/12/19/4898765/3e9952da09935cc8e6b2adc333dd6b38.png"
+      "imageUrl": "/img/3e9952da09935cc8e6b2adc333dd6b38.png"
     },
     {
       "id": "g122",
@@ -445,7 +445,7 @@
         "add": "治疗效率提升",
         "skill": "医疗"
       },
-      "imageUrl": "https://bbs.hycdn.cn/image/2025/12/19/4898765/4938b6f2ec089726e15365d5643abd24.png"
+      "imageUrl": "/img/4938b6f2ec089726e15365d5643abd24.png"
     },
     {
       "id": "g121",
@@ -457,7 +457,7 @@
         "add": "电磁伤害提升",
         "skill": "附术"
       },
-      "imageUrl": "https://bbs.hycdn.cn/image/2025/12/19/4898765/c9d2120f86a877cfd098d5368b567e9b.png"
+      "imageUrl": "/img/c9d2120f86a877cfd098d5368b567e9b.png"
     },
     {
       "id": "g120",
@@ -469,7 +469,7 @@
         "add": "终结技效率提升",
         "skill": "昂扬"
       },
-      "imageUrl": "https://bbs.hycdn.cn/image/2025/12/19/4898765/d88adfb9abbbd0bb2dc4f8cc5f6081ec.png"
+      "imageUrl": "/img/d88adfb9abbbd0bb2dc4f8cc5f6081ec.png"
     },
     {
       "id": "g119",
@@ -481,7 +481,7 @@
         "add": "攻击提升",
         "skill": "夜幕"
       },
-      "imageUrl": "https://bbs.hycdn.cn/image/2025/12/13/179550/1fae00967359f5ce377d653319f63093.png"
+      "imageUrl": "/img/1fae00967359f5ce377d653319f63093.png"
     },
     {
       "id": "g111",
@@ -493,7 +493,7 @@
         "add": "灼热伤害提升",
         "skill": "追袭"
       },
-      "imageUrl": "https://bbs.hycdn.cn/image/2025/12/13/179550/e4b151edf9b587ac9a3b75f979b7f488.png"
+      "imageUrl": "/img/e4b151edf9b587ac9a3b75f979b7f488.png"
     },
     {
       "id": "g110",
@@ -505,7 +505,7 @@
         "add": "终结技效率提升",
         "skill": "迸发"
       },
-      "imageUrl": "https://bbs.hycdn.cn/image/2025/12/13/179550/8033f06c27cea64f753f91457adc6274.png"
+      "imageUrl": "/img/8033f06c27cea64f753f91457adc6274.png"
     },
     {
       "id": "g109",
@@ -517,7 +517,7 @@
         "add": "法术伤害提升",
         "skill": "附术"
       },
-      "imageUrl": "https://bbs.hycdn.cn/image/2025/12/13/179550/ee94bf8af3a6a5ec650a9080501772e4.png"
+      "imageUrl": "/img/ee94bf8af3a6a5ec650a9080501772e4.png"
     },
     {
       "id": "g102",
@@ -529,7 +529,7 @@
         "add": "电磁伤害提升",
         "skill": "压制"
       },
-      "imageUrl": "https://bbs.hycdn.cn/image/2025/12/13/179550/cfc5f22138e0ee0af9047e7d05be42b3.png"
+      "imageUrl": "/img/cfc5f22138e0ee0af9047e7d05be42b3.png"
     },
     {
       "id": "g101",
@@ -541,7 +541,7 @@
         "add": "物理伤害提升",
         "skill": "附术"
       },
-      "imageUrl": "https://bbs.hycdn.cn/image/2025/12/13/179550/8ffe428d0400cb3d78ec691757a1837e.png"
+      "imageUrl": "/img/8ffe428d0400cb3d78ec691757a1837e.png"
     },
     {
       "id": "g100",
@@ -553,7 +553,7 @@
         "add": "终结技效率提升",
         "skill": "残暴"
       },
-      "imageUrl": "https://bbs.hycdn.cn/image/2025/12/13/179550/663ce7b26f57febda19b97c95dfa014e.png"
+      "imageUrl": "/img/663ce7b26f57febda19b97c95dfa014e.png"
     },
     {
       "id": "g82",
@@ -565,7 +565,7 @@
         "add": "生命提升",
         "skill": "效益"
       },
-      "imageUrl": "https://bbs.hycdn.cn/image/2025/12/13/179550/ec88a8b0d660b743d3adaf76713fb3f0.png"
+      "imageUrl": "/img/ec88a8b0d660b743d3adaf76713fb3f0.png"
     },
     {
       "id": "g81",
@@ -577,7 +577,7 @@
         "add": "生命提升",
         "skill": "医疗"
       },
-      "imageUrl": "https://bbs.hycdn.cn/image/2025/12/13/179550/cb0a7a607ef53fb880b4a02038cf3a54.png"
+      "imageUrl": "/img/cb0a7a607ef53fb880b4a02038cf3a54.png"
     },
     {
       "id": "g80",
@@ -589,7 +589,7 @@
         "add": "源石技艺提升",
         "skill": "残暴"
       },
-      "imageUrl": "https://bbs.hycdn.cn/image/2025/12/13/179550/3c890c82d1a43d843ba135d08e603323.png"
+      "imageUrl": "/img/3c890c82d1a43d843ba135d08e603323.png"
     },
     {
       "id": "g79",
@@ -601,7 +601,7 @@
         "add": "终结技效率提升",
         "skill": "迸发"
       },
-      "imageUrl": "https://bbs.hycdn.cn/image/2025/12/13/179550/f59210444eae33336b43b8648964dca3.png"
+      "imageUrl": "/img/f59210444eae33336b43b8648964dca3.png"
     },
     {
       "id": "g66",
@@ -613,7 +613,7 @@
         "add": "物理伤害提升",
         "skill": "夜幕"
       },
-      "imageUrl": "https://bbs.hycdn.cn/image/2025/12/14/4898765/4cd481900824a3e75a4519baf9956846.png"
+      "imageUrl": "/img/4cd481900824a3e75a4519baf9956846.png"
     },
     {
       "id": "g65",
@@ -625,7 +625,7 @@
         "add": "攻击提升",
         "skill": "流转"
       },
-      "imageUrl": "https://bbs.hycdn.cn/image/2025/12/14/4898765/25627c57e5593628b2bcd2dce02d41b6.png"
+      "imageUrl": "/img/25627c57e5593628b2bcd2dce02d41b6.png"
     },
     {
       "id": "g64",
@@ -637,7 +637,7 @@
         "add": "攻击提升",
         "skill": "附术"
       },
-      "imageUrl": "https://bbs.hycdn.cn/image/2025/12/14/4898765/799ee937d99ec7c66752b765bd7c839c.png"
+      "imageUrl": "/img/799ee937d99ec7c66752b765bd7c839c.png"
     },
     {
       "id": "g63",
@@ -649,7 +649,7 @@
         "add": "寒冷伤害提升",
         "skill": "压制"
       },
-      "imageUrl": "https://bbs.hycdn.cn/image/2025/12/14/4898765/848ff520db2f682bf91e2ff1216c88cc.png"
+      "imageUrl": "/img/848ff520db2f682bf91e2ff1216c88cc.png"
     },
     {
       "id": "g62",
@@ -661,7 +661,7 @@
         "add": "终结技效率提升",
         "skill": "昂扬"
       },
-      "imageUrl": "https://bbs.hycdn.cn/image/2025/12/14/4898765/0c6c8757a1ad4e75db4bf98810c8868a.png"
+      "imageUrl": "/img/0c6c8757a1ad4e75db4bf98810c8868a.png"
     },
     {
       "id": "g61",
@@ -673,7 +673,7 @@
         "add": "物理伤害提升",
         "skill": "巧技"
       },
-      "imageUrl": "https://bbs.hycdn.cn/image/2025/12/14/4898765/1b245cfa0cb252c208c4e91090626498.png"
+      "imageUrl": "/img/1b245cfa0cb252c208c4e91090626498.png"
     },
     {
       "id": "g118",
@@ -685,7 +685,7 @@
         "add": "攻击提升",
         "skill": "压制"
       },
-      "imageUrl": "https://bbs.hycdn.cn/image/2025/12/17/4898765/9101ca1d3f6ea9d0f4cce34f6b830e19.png"
+      "imageUrl": "/img/9101ca1d3f6ea9d0f4cce34f6b830e19.png"
     },
     {
       "id": "g117",
@@ -697,7 +697,7 @@
         "add": "法术伤害提升",
         "skill": "昂扬"
       },
-      "imageUrl": "https://bbs.hycdn.cn/image/2025/12/17/4898765/6f72e3063a098775f233d853c17361a2.png"
+      "imageUrl": "/img/6f72e3063a098775f233d853c17361a2.png"
     },
     {
       "id": "g108",
@@ -709,7 +709,7 @@
         "add": "法术伤害提升",
         "skill": "追袭"
       },
-      "imageUrl": "https://bbs.hycdn.cn/image/2025/12/13/179550/74149856728ce1495a978ae88c3579c6.png"
+      "imageUrl": "/img/74149856728ce1495a978ae88c3579c6.png"
     },
     {
       "id": "g107",
@@ -721,7 +721,7 @@
         "add": "攻击提升",
         "skill": "压制"
       },
-      "imageUrl": "https://bbs.hycdn.cn/image/2025/12/13/179550/4159592c35d1926d3744134927c11937.png"
+      "imageUrl": "/img/4159592c35d1926d3744134927c11937.png"
     },
     {
       "id": "g99",
@@ -733,7 +733,7 @@
         "add": "法术伤害提升",
         "skill": "压制"
       },
-      "imageUrl": "https://bbs.hycdn.cn/image/2025/12/18/4898765/de8ba4be712c2ef44a49d770d4f3ba14.png"
+      "imageUrl": "/img/de8ba4be712c2ef44a49d770d4f3ba14.png"
     },
     {
       "id": "g98",
@@ -745,7 +745,7 @@
         "add": "攻击提升",
         "skill": "昂扬"
       },
-      "imageUrl": "https://bbs.hycdn.cn/image/2025/12/18/4898765/2c154215940184b90ca3d3a30af43099.png"
+      "imageUrl": "/img/2c154215940184b90ca3d3a30af43099.png"
     },
     {
       "id": "g78",
@@ -757,7 +757,7 @@
         "add": "生命提升",
         "skill": "粉碎"
       },
-      "imageUrl": "https://bbs.hycdn.cn/image/2025/12/18/4898765/bb5a7987c2f45287a42558f2a0b97af8.png"
+      "imageUrl": "/img/bb5a7987c2f45287a42558f2a0b97af8.png"
     },
     {
       "id": "g77",
@@ -769,7 +769,7 @@
         "add": "攻击提升",
         "skill": "压制"
       },
-      "imageUrl": "https://bbs.hycdn.cn/image/2025/12/18/4898765/19f6482926ff3cb2b9d46c48764e6168.png"
+      "imageUrl": "/img/19f6482926ff3cb2b9d46c48764e6168.png"
     },
     {
       "id": "g60",
@@ -781,7 +781,7 @@
         "add": "攻击提升",
         "skill": "追袭"
       },
-      "imageUrl": "https://bbs.hycdn.cn/image/2025/12/14/4898765/cafdf9f78f54077d77fbed07b0d1678c.png"
+      "imageUrl": "/img/cafdf9f78f54077d77fbed07b0d1678c.png"
     },
     {
       "id": "g59",
@@ -793,7 +793,7 @@
         "add": "物理伤害提升",
         "skill": "压制"
       },
-      "imageUrl": "https://bbs.hycdn.cn/image/2025/12/14/4898765/5636efde70c4076675cdadc80c91714f.png"
+      "imageUrl": "/img/5636efde70c4076675cdadc80c91714f.png"
     }
   ],
   "depositionPoints": [
@@ -822,6 +822,7 @@
         "医疗",
         "附术",
         "巧技",
+        "昂扬",
         "追袭",
         "压制"
       ]
@@ -851,6 +852,7 @@
         "夜幕",
         "附术",
         "残暴",
+        "昂扬",
         "追袭",
         "强攻"
       ]
@@ -865,6 +867,7 @@
         "医疗",
         "附术",
         "残暴",
+        "昂扬",
         "粉碎",
         "追袭"
       ]
@@ -894,6 +897,7 @@
         "切骨",
         "医疗",
         "巧技",
+        "昂扬",
         "粉碎",
         "压制"
       ]
