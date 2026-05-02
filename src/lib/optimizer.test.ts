@@ -166,7 +166,24 @@ describe("optimizeGrouped", () => {
     const c = W("c", "意志提升", "电磁伤害提升", "效益");
     const points = [P("p", ["压制", "效益"])];
     const groups = optimizeGrouped([a, b, c], points);
-    expect(groups[0].hits).toHaveLength(2);
-    expect(groups[1].hits.length).toBeLessThanOrEqual(2);
+    expect(groups[0].hits.length).toBeGreaterThanOrEqual(2);
+  });
+
+  it("includes a no-lock plan when weapons are scattered enough that locking covers fewer", () => {
+    // 5 把武器都落在同一点位池子里，但 base/add 各不相同，锁定只能覆盖 1
+    const weapons = [
+      W("a", "力量提升", "攻击提升", "压制"),
+      W("b", "敏捷提升", "生命提升", "压制"),
+      W("c", "智识提升", "物理伤害提升", "压制"),
+      W("d", "意志提升", "法术伤害提升", "压制"),
+      W("e", "主能力提升", "电磁伤害提升", "压制"),
+    ];
+    const points = [P("p", ["压制"])];
+    const groups = optimizeGrouped(weapons, points, { topK: 10 });
+    const noLock = groups.find((g) => g.noLock);
+    expect(noLock).toBeDefined();
+    expect(noLock!.hits).toHaveLength(5);
+    // 每件武器单次命中: 1/5 × 1/12 × 1/1 = 1/60
+    expect(noLock!.totalProb).toBeCloseTo(5 / (5 * 12 * 1));
   });
 });

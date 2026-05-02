@@ -120,8 +120,44 @@ export function optimize(
 }
 
 /**
+ * 不锁词条时该淤积点能命中的武器（基质 3 槽完全随机）。
+ * 命中概率 = 1/|basePool| × 1/|addPool| × 1/|skillPool|，每件武器独立。
+ * 当用户选的武器在词条层面非常分散（无明显共同点）但都落在该 point 的 3 池里时，
+ * "不锁定但覆盖全部"可能比"锁定只覆盖一两件"总产出更高。
+ */
+function unlockedPlanForPoint(
+  point: DepositionPoint,
+  weapons: Weapon[],
+): PlanGroup | null {
+  const basePool = point.basePool ?? BASE_ATTRS;
+  const addPool = point.addPool ?? ADD_ATTRS;
+  const skillPool = point.skillPool;
+  if (basePool.length === 0 || addPool.length === 0 || skillPool.length === 0) {
+    return null;
+  }
+  const perDrop =
+    (1 / basePool.length) * (1 / addPool.length) * (1 / skillPool.length);
+  const hits: { weaponId: string; prob: number }[] = [];
+  for (const w of weapons) {
+    if (!basePool.includes(w.ideal.base)) continue;
+    if (!addPool.includes(w.ideal.add)) continue;
+    if (!skillPool.includes(w.ideal.skill)) continue;
+    hits.push({ weaponId: w.id, prob: perDrop });
+  }
+  if (hits.length === 0) return null;
+  return {
+    point,
+    hits,
+    totalProb: perDrop * hits.length,
+    lockOptions: [],
+    noLock: true,
+  };
+}
+
+/**
  * 在 optimize 结果之上按 (淤积点, 命中武器集合) 聚合。
  * 同一聚合下的所有 (B, X) 都进入 lockOptions，UI 选一项作为主推、其余作为备选展示。
+ * 同时为每个候选点位生成"不锁定"方案，参与同一排序。
  */
 export function optimizeGrouped(
   weapons: Weapon[],
@@ -129,7 +165,9 @@ export function optimizeGrouped(
   opts: OptimizeOptions = {},
 ): PlanGroup[] {
   const { topK = 5, pointFilter } = opts;
-  // 内部用一个大 topK 收集足够候选，再聚合
+  if (weapons.length === 0) return [];
+  const filteredPoints = pointFilter ? points.filter(pointFilter) : points;
+
   const allPlans = optimize(weapons, points, {
     pointFilter,
     topK: Number.MAX_SAFE_INTEGER,
@@ -141,7 +179,7 @@ export function optimizeGrouped(
       .map((h) => h.weaponId)
       .sort()
       .join(",");
-    const key = `${plan.point.id}|${hitKey}`;
+    const key = `${plan.point.id}|locked|${hitKey}`;
     let group = groupMap.get(key);
     if (!group) {
       group = {
@@ -158,12 +196,24 @@ export function optimizeGrouped(
     });
   }
 
+  // 不锁定候选：每个点位至多一条
+  for (const point of filteredPoints) {
+    const unlocked = unlockedPlanForPoint(point, weapons);
+    if (!unlocked) continue;
+    const hitKey = unlocked.hits
+      .map((h) => h.weaponId)
+      .sort()
+      .join(",");
+    groupMap.set(`${point.id}|nolock|${hitKey}`, unlocked);
+  }
+
   const groups = [...groupMap.values()].sort((a, b) => {
-    if (b.hits.length !== a.hits.length) return b.hits.length - a.hits.length;
-    return b.totalProb - a.totalProb;
+    // 主排序：期望产出（覆盖×单件概率）从高到低
+    if (b.totalProb !== a.totalProb) return b.totalProb - a.totalProb;
+    // 同期望：覆盖件数多的在前
+    return b.hits.length - a.hits.length;
   });
 
-  // 组内对锁词条排序：优先 kind=skill (锁技能更直接) 然后按名称字典序
   for (const g of groups) {
     g.lockOptions.sort((a, b) => {
       if (a.lockedAttr.kind !== b.lockedAttr.kind) {

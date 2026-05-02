@@ -91,6 +91,7 @@ function GroupCard({
   weaponById: Map<string, Weapon>;
 }) {
   const [primaryLock, ...otherLocks] = group.lockOptions;
+  const isNoLock = group.noLock === true;
 
   return (
     <article
@@ -115,6 +116,11 @@ function GroupCard({
         <span className="font-mono-tech text-[10px] tracking-[0.16em] text-[var(--mute)]">
           //CASE_{group.point.id.toUpperCase().slice(-4)}
         </span>
+        {isNoLock && (
+          <span className="inline-flex h-[16px] items-center border border-[var(--orange-deep)] px-1 text-[9.5px] font-mono-tech tracking-[0.18em] text-[var(--orange-soft)]">
+            NO-LOCK
+          </span>
+        )}
         <span className="ml-auto font-mono-tech text-[10px] tracking-[0.18em] text-[var(--orange-soft)]">
           E[Y] {group.totalProb.toFixed(3)}/CYCLE
         </span>
@@ -133,7 +139,11 @@ function GroupCard({
           </div>
         </div>
 
-        <LockOptionView primaryLock={primaryLock} otherLocks={otherLocks} />
+        {isNoLock ? (
+          <NoLockBanner />
+        ) : (
+          <LockOptionView primaryLock={primaryLock} otherLocks={otherLocks} />
+        )}
 
         <div className="flex flex-col gap-1">
           <div className="flex items-baseline gap-2">
@@ -177,6 +187,22 @@ function GroupCard({
         </div>
       </div>
     </article>
+  );
+}
+
+function NoLockBanner() {
+  return (
+    <div className="flex flex-col gap-1 conn-line text-[var(--ink-2)] pl-4">
+      <span className="sect-label">// LOCK-CONFIG</span>
+      <div className="flex flex-wrap items-center gap-2">
+        <span className="inline-flex h-[20px] items-center border border-[var(--orange-deep)] bg-[#1a0d05] px-1.5 text-[10px] font-mono-tech tracking-[0.18em] text-[var(--orange-soft)]">
+          不锁定 ▸ NO LOCK
+        </span>
+        <span className="font-mono-tech text-[10px] tracking-[0.06em] text-[var(--mute)]">
+          武器分散，覆盖全员产出更高
+        </span>
+      </div>
+    </div>
   );
 }
 
