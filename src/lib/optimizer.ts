@@ -3,7 +3,12 @@ import {
   BASE_ATTRS,
   BASE_LOCK_COUNT,
 } from "@/data";
-import type { DepositionPoint, LockPlan, Weapon } from "@/lib/types";
+import type {
+  DepositionPoint,
+  LockPlan,
+  PlanGroup,
+  Weapon,
+} from "@/lib/types";
 
 function chooseK<T>(arr: readonly T[], k: number): T[][] {
   const out: T[][] = [];
@@ -103,6 +108,71 @@ export function optimize(
   });
 
   return plans.slice(0, topK);
+}
+
+/**
+ * 在 optimize 结果之上按 (淤积点, 命中武器集合) 聚合。
+ * 同一聚合下的所有 (B, X) 都进入 lockOptions，UI 选一项作为主推、其余作为备选展示。
+ */
+export function optimizeGrouped(
+  weapons: Weapon[],
+  points: DepositionPoint[],
+  opts: OptimizeOptions = {},
+): PlanGroup[] {
+  const { topK = 5, pointFilter } = opts;
+  // 内部用一个大 topK 收集足够候选，再聚合
+  const allPlans = optimize(weapons, points, {
+    pointFilter,
+    topK: Number.MAX_SAFE_INTEGER,
+  });
+
+  const groupMap = new Map<string, PlanGroup>();
+  for (const plan of allPlans) {
+    const hitKey = plan.hits
+      .map((h) => h.weaponId)
+      .sort()
+      .join(",");
+    const key = `${plan.point.id}|${hitKey}`;
+    let group = groupMap.get(key);
+    if (!group) {
+      group = {
+        point: plan.point,
+        hits: plan.hits.slice(),
+        totalProb: plan.totalProb,
+        lockOptions: [],
+      };
+      groupMap.set(key, group);
+    }
+    group.lockOptions.push({
+      lockedBases: plan.lockedBases,
+      lockedAttr: plan.lockedAttr,
+    });
+  }
+
+  const groups = [...groupMap.values()].sort((a, b) => {
+    if (b.hits.length !== a.hits.length) return b.hits.length - a.hits.length;
+    return b.totalProb - a.totalProb;
+  });
+
+  // 组内对锁词条排序：优先 kind=skill (锁技能更直接) 然后按名称字典序
+  for (const g of groups) {
+    g.lockOptions.sort((a, b) => {
+      if (a.lockedAttr.kind !== b.lockedAttr.kind) {
+        return a.lockedAttr.kind === "skill" ? -1 : 1;
+      }
+      return a.lockedAttr.name.localeCompare(b.lockedAttr.name, "zh");
+    });
+  }
+
+  return groups.slice(0, topK);
+}
+
+export function uncoveredWeaponsByGroup(
+  weapons: Weapon[],
+  group: PlanGroup,
+): Weapon[] {
+  const covered = new Set(group.hits.map((h) => h.weaponId));
+  return weapons.filter((w) => !covered.has(w.id));
 }
 
 export function uncoveredWeapons(weapons: Weapon[], plan: LockPlan): Weapon[] {

@@ -5,7 +5,7 @@ import { WeaponPicker } from "@/components/WeaponPicker";
 import { SelectedWeapons } from "@/components/SelectedWeapons";
 import { ResultPanel } from "@/components/ResultPanel";
 import { useRuntimeData } from "@/data/runtime";
-import { optimize, uncoveredWeapons } from "@/lib/optimizer";
+import { optimizeGrouped, uncoveredWeaponsByGroup } from "@/lib/optimizer";
 
 export default function Home() {
   const { weaponById, depositionPoints, source, fetchedAt } = useRuntimeData();
@@ -19,15 +19,15 @@ export default function Home() {
     [selectedIds, weaponById],
   );
 
-  const plans = useMemo(
-    () => optimize(selectedWeapons, depositionPoints, { topK: 5 }),
+  const groups = useMemo(
+    () => optimizeGrouped(selectedWeapons, depositionPoints, { topK: 5 }),
     [selectedWeapons, depositionPoints],
   );
 
   const uncovered = useMemo(() => {
-    if (plans.length === 0) return selectedWeapons;
-    return uncoveredWeapons(selectedWeapons, plans[0]);
-  }, [plans, selectedWeapons]);
+    if (groups.length === 0) return selectedWeapons;
+    return uncoveredWeaponsByGroup(selectedWeapons, groups[0]);
+  }, [groups, selectedWeapons]);
 
   function toggle(id: string) {
     setSelectedIds((prev) => {
@@ -60,7 +60,7 @@ export default function Home() {
             onRemove={toggle}
             onClear={clear}
           />
-          <ResultPanel plans={plans} uncovered={uncovered} />
+          <ResultPanel groups={groups} uncovered={uncovered} />
         </>
       )}
 
