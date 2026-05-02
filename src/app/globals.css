@@ -263,6 +263,32 @@ body::after {
   animation: selectPulse 600ms ease-out;
 }
 
+/* hint pulse — small breathing arrow on swipe-hint */
+@keyframes hintPulse {
+  0%,
+  100% {
+    opacity: 0.6;
+    transform: translateX(0);
+  }
+  50% {
+    opacity: 1;
+    transform: translateX(2px);
+  }
+}
+.hint-pulse {
+  animation: hintPulse 1.4s ease-in-out infinite;
+}
+
+/* paged carousel: hide horizontal scrollbar but keep functional */
+.paged-track {
+  scrollbar-width: none;
+  scroll-padding-inline: 0;
+  scroll-behavior: smooth;
+}
+.paged-track::-webkit-scrollbar {
+  display: none;
+}
+
 /* slow ambient scan line moving down the page */
 @keyframes scanDown {
   0% {
