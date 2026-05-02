@@ -40,127 +40,639 @@
   },
   "weapons": [
     {
-      "id": "wuzhongweiguang",
-      "name": "雾中微光",
-      "rarity": 6,
-      "weaponClass": "施术单元",
-      "operator": "庄方宜",
-      "ideal": { "base": "意志提升", "add": "电磁伤害提升", "skill": "效益" }
-    },
-    {
-      "id": "guzhou",
+      "id": "g1382",
       "name": "孤舟",
       "rarity": 6,
       "weaponClass": "施术单元",
-      "ideal": { "base": "意志提升", "add": "电磁伤害提升", "skill": "效益" }
+      "ideal": {
+        "base": "意志提升",
+        "add": "攻击提升",
+        "skill": "压制"
+      },
+      "imageUrl": "https://bbs.hycdn.cn/image/common/20260417/3644013/69e21a84fb782837ee03debb_56331367.png"
     },
     {
-      "id": "langzhifei",
+      "id": "g1400",
+      "name": "雾中微光",
+      "rarity": 6,
+      "weaponClass": "施术单元",
+      "ideal": {
+        "base": "意志提升",
+        "add": "电磁伤害提升",
+        "skill": "效益"
+      },
+      "imageUrl": "https://bbs.hycdn.cn/image/common/20260417/3644013/69e219537c7aea6c2812078b_db193eac.png"
+    },
+    {
+      "id": "g1177",
       "name": "狼之绯",
       "rarity": 6,
-      "weaponClass": "双手剑",
-      "ideal": { "base": "力量提升", "add": "物理伤害提升", "skill": "压制" }
+      "weaponClass": "单手剑",
+      "ideal": {
+        "base": "敏捷提升",
+        "add": "暴击率提升",
+        "skill": "切骨"
+      },
+      "imageUrl": "https://bbs.hycdn.cn/image/common/20260330/3644013/69ca113e4298be0edf049c54_6ad0f152.png"
     },
     {
-      "id": "luocao",
+      "id": "g1176",
       "name": "落草",
       "rarity": 6,
-      "weaponClass": "长柄",
-      "ideal": { "base": "敏捷提升", "add": "物理伤害提升", "skill": "追袭" }
+      "weaponClass": "手铳",
+      "ideal": {
+        "base": "敏捷提升",
+        "add": "攻击提升",
+        "skill": "迸发"
+      },
+      "imageUrl": "https://bbs.hycdn.cn/image/common/20260312/3644013/69b270954298be0edf043059_13673ac9.png"
     },
     {
-      "id": "wangxiang",
+      "id": "g1174",
       "name": "望乡",
       "rarity": 6,
       "weaponClass": "手铳",
-      "ideal": { "base": "敏捷提升", "add": "物理伤害提升", "skill": "追袭" }
+      "ideal": {
+        "base": "敏捷提升",
+        "add": "寒冷伤害提升",
+        "skill": "压制"
+      },
+      "imageUrl": "https://bbs.hycdn.cn/image/common/20260312/3644013/69b2521e45f7d92a73c82cbe_3eac6ad0.png"
     },
     {
-      "id": "guangrongjiyi",
+      "id": "g1173",
       "name": "光荣记忆",
       "rarity": 6,
       "weaponClass": "单手剑",
-      "ideal": { "base": "智识提升", "add": "法术伤害提升", "skill": "附术" }
+      "ideal": {
+        "base": "敏捷提升",
+        "add": "暴击率提升",
+        "skill": "夜幕"
+      },
+      "imageUrl": "https://bbs.hycdn.cn/image/common/20260312/3644013/69b25fc34298be0edf042fb9_13673ac9.png"
     },
     {
-      "id": "yishubaojun",
+      "id": "g112",
       "name": "艺术暴君",
       "rarity": 6,
-      "weaponClass": "施术单元",
-      "ideal": { "base": "智识提升", "add": "法术伤害提升", "skill": "巧技" }
+      "weaponClass": "手铳",
+      "ideal": {
+        "base": "智识提升",
+        "add": "暴击率提升",
+        "skill": "切骨"
+      },
+      "imageUrl": "https://bbs.hycdn.cn/image/2025/12/13/179550/e87e7164507ab8320f55a37d9cd0b912.png"
     },
     {
-      "id": "rongzhuhuoyan",
+      "id": "g70",
       "name": "熔铸火焰",
-      "rarity": 5,
-      "weaponClass": "长柄",
-      "ideal": { "base": "力量提升", "add": "灼热伤害提升", "skill": "压制" }
-    },
-    {
-      "id": "qishijingshen",
-      "name": "骑士精神",
-      "rarity": 5,
+      "rarity": 6,
       "weaponClass": "单手剑",
-      "ideal": { "base": "力量提升", "add": "物理伤害提升", "skill": "昂扬" }
+      "ideal": {
+        "base": "智识提升",
+        "add": "攻击提升",
+        "skill": "夜幕"
+      },
+      "imageUrl": "https://bbs.hycdn.cn/image/2025/12/14/4898765/6dd00511c917b81b8ab861d989c38499.png"
     },
     {
-      "id": "yiwang",
-      "name": "遗忘",
-      "rarity": 5,
-      "weaponClass": "双手剑",
-      "ideal": { "base": "力量提升", "add": "寒冷伤害提升", "skill": "夜幕" }
+      "id": "g71",
+      "name": "黯色火炬",
+      "rarity": 6,
+      "weaponClass": "单手剑",
+      "ideal": {
+        "base": "智识提升",
+        "add": "灼热伤害提升",
+        "skill": "附术"
+      },
+      "imageUrl": "https://bbs.hycdn.cn/image/2025/12/12/179550/7c4e1b316266660c8007616b6489dfbf.png"
     },
     {
-      "id": "linghangzhe",
+      "id": "g113",
       "name": "领航者",
+      "rarity": 6,
+      "weaponClass": "手铳",
+      "ideal": {
+        "base": "智识提升",
+        "add": "寒冷伤害提升",
+        "skill": "附术"
+      },
+      "imageUrl": "https://bbs.hycdn.cn/image/2025/12/13/179550/a751ba17838d2cd68212fcbd2abef03a.png"
+    },
+    {
+      "id": "g126",
+      "name": "作品：蚀迹",
+      "rarity": 6,
+      "weaponClass": "施术单元",
+      "ideal": {
+        "base": "意志提升",
+        "add": "自然伤害提升",
+        "skill": "压制"
+      },
+      "imageUrl": "https://bbs.hycdn.cn/image/2025/12/13/179550/a5f649f205935deedc20519b2c4a01d1.png"
+    },
+    {
+      "id": "g129",
+      "name": "骑士精神",
+      "rarity": 6,
+      "weaponClass": "施术单元",
+      "ideal": {
+        "base": "意志提升",
+        "add": "生命提升",
+        "skill": "医疗"
+      },
+      "imageUrl": "https://bbs.hycdn.cn/image/2025/12/13/179550/869d470dc10a2af0e6a621b39d3b3ab1.png"
+    },
+    {
+      "id": "g125",
+      "name": "沧溟星梦",
+      "rarity": 6,
+      "weaponClass": "施术单元",
+      "ideal": {
+        "base": "智识提升",
+        "add": "治疗效率提升",
+        "skill": "附术"
+      },
+      "imageUrl": "https://bbs.hycdn.cn/image/2025/12/13/179550/c5954f91e2fa0bbd04313be756397517.png"
+    },
+    {
+      "id": "g114",
+      "name": "楔子",
+      "rarity": 6,
+      "weaponClass": "手铳",
+      "ideal": {
+        "base": "主能力提升",
+        "add": "暴击率提升",
+        "skill": "附术"
+      },
+      "imageUrl": "https://bbs.hycdn.cn/image/2025/12/13/179550/9d3d49afa38e95a4312ba67ee7011099.png"
+    },
+    {
+      "id": "g105",
+      "name": "J.E.T.",
+      "rarity": 6,
+      "weaponClass": "长柄",
+      "ideal": {
+        "base": "主能力提升",
+        "add": "攻击提升",
+        "skill": "压制"
+      },
+      "imageUrl": "https://bbs.hycdn.cn/image/2025/12/15/4898765/7e5f873680aea8908ca12bea1f88f233.png"
+    },
+    {
+      "id": "g104",
+      "name": "骁勇",
+      "rarity": 6,
+      "weaponClass": "长柄",
+      "ideal": {
+        "base": "敏捷提升",
+        "add": "物理伤害提升",
+        "skill": "巧技"
+      },
+      "imageUrl": "https://bbs.hycdn.cn/image/2025/12/15/4898765/e6b4da88f47fbfda7ac46bcec90983f0.png"
+    },
+    {
+      "id": "g103",
+      "name": "负山",
+      "rarity": 6,
+      "weaponClass": "长柄",
+      "ideal": {
+        "base": "敏捷提升",
+        "add": "物理伤害提升",
+        "skill": "效益"
+      },
+      "imageUrl": "https://bbs.hycdn.cn/image/2025/12/13/179550/d5503c032da62c81e59174a211fc4b8a.png"
+    },
+    {
+      "id": "g86",
+      "name": "昔日精品",
+      "rarity": 6,
+      "weaponClass": "双手剑",
+      "ideal": {
+        "base": "意志提升",
+        "add": "生命提升",
+        "skill": "效益"
+      },
+      "imageUrl": "https://bbs.hycdn.cn/image/2025/12/13/179550/acd8b54f5cf3441a9841cf301b62f4c9.png"
+    },
+    {
+      "id": "g85",
+      "name": "典范",
+      "rarity": 6,
+      "weaponClass": "双手剑",
+      "ideal": {
+        "base": "主能力提升",
+        "add": "攻击提升",
+        "skill": "压制"
+      },
+      "imageUrl": "https://bbs.hycdn.cn/image/2025/12/13/179550/b02d06c63dc04f7c3168692f8ee89f60.png"
+    },
+    {
+      "id": "g84",
+      "name": "赫拉芬格",
+      "rarity": 6,
+      "weaponClass": "双手剑",
+      "ideal": {
+        "base": "力量提升",
+        "add": "攻击提升",
+        "skill": "迸发"
+      },
+      "imageUrl": "https://bbs.hycdn.cn/image/2025/12/13/179550/8cd139e939fad8c1888e8e3257b9d738.png"
+    },
+    {
+      "id": "g83",
+      "name": "大雷斑",
+      "rarity": 6,
+      "weaponClass": "双手剑",
+      "ideal": {
+        "base": "力量提升",
+        "add": "生命提升",
+        "skill": "医疗"
+      },
+      "imageUrl": "https://bbs.hycdn.cn/image/2025/12/13/179550/1387fa14d4f6b3f85b1225aaa7579f5b.png"
+    },
+    {
+      "id": "g74",
+      "name": "显赫声名",
+      "rarity": 6,
+      "weaponClass": "单手剑",
+      "ideal": {
+        "base": "主能力提升",
+        "add": "物理伤害提升",
+        "skill": "残暴"
+      },
+      "imageUrl": "https://bbs.hycdn.cn/image/2025/12/12/179550/16b0d5d71f64378df2c0e6b7a23a6fde.png"
+    },
+    {
+      "id": "g73",
+      "name": "热熔切割器",
+      "rarity": 6,
+      "weaponClass": "单手剑",
+      "ideal": {
+        "base": "意志提升",
+        "add": "攻击提升",
+        "skill": "流转"
+      },
+      "imageUrl": "https://bbs.hycdn.cn/image/2025/12/12/179550/d05172004f474a38ff4c861b570751d4.png"
+    },
+    {
+      "id": "g72",
+      "name": "扶摇",
+      "rarity": 6,
+      "weaponClass": "单手剑",
+      "ideal": {
+        "base": "主能力提升",
+        "add": "暴击率提升",
+        "skill": "夜幕"
+      },
+      "imageUrl": "https://bbs.hycdn.cn/image/2025/12/12/179550/a9fc3999c4d382f13ae49c188f6af9fe.png"
+    },
+    {
+      "id": "g68",
+      "name": "不知归",
+      "rarity": 6,
+      "weaponClass": "单手剑",
+      "ideal": {
+        "base": "意志提升",
+        "add": "攻击提升",
+        "skill": "流转"
+      },
+      "imageUrl": "https://bbs.hycdn.cn/image/2025/12/12/179550/534d76101624b41e6f48f2c8e88103d9.png"
+    },
+    {
+      "id": "g67",
+      "name": "宏愿",
+      "rarity": 6,
+      "weaponClass": "单手剑",
+      "ideal": {
+        "base": "敏捷提升",
+        "add": "攻击提升",
+        "skill": "附术"
+      },
+      "imageUrl": "https://bbs.hycdn.cn/image/2025/12/15/4898765/10a946a1f8349176f208d5c63789d6b2.png"
+    },
+    {
+      "id": "g122",
+      "name": "布道自由",
+      "rarity": 5,
+      "weaponClass": "施术单元",
+      "ideal": {
+        "base": "意志提升",
+        "add": "治疗效率提升",
+        "skill": "医疗"
+      },
+      "imageUrl": "https://bbs.hycdn.cn/image/2025/12/19/4898765/4938b6f2ec089726e15365d5643abd24.png"
+    },
+    {
+      "id": "g121",
+      "name": "迷失荒野",
+      "rarity": 5,
+      "weaponClass": "施术单元",
+      "ideal": {
+        "base": "智识提升",
+        "add": "电磁伤害提升",
+        "skill": "附术"
+      },
+      "imageUrl": "https://bbs.hycdn.cn/image/2025/12/19/4898765/c9d2120f86a877cfd098d5368b567e9b.png"
+    },
+    {
+      "id": "g119",
+      "name": "悼亡诗",
+      "rarity": 5,
+      "weaponClass": "施术单元",
+      "ideal": {
+        "base": "智识提升",
+        "add": "攻击提升",
+        "skill": "夜幕"
+      },
+      "imageUrl": "https://bbs.hycdn.cn/image/2025/12/13/179550/1fae00967359f5ce377d653319f63093.png"
+    },
+    {
+      "id": "g111",
+      "name": "理性告别",
       "rarity": 5,
       "weaponClass": "手铳",
-      "ideal": { "base": "敏捷提升", "add": "暴击率提升", "skill": "流转" }
+      "ideal": {
+        "base": "力量提升",
+        "add": "灼热伤害提升",
+        "skill": "追袭"
+      },
+      "imageUrl": "https://bbs.hycdn.cn/image/2025/12/13/179550/e4b151edf9b587ac9a3b75f979b7f488.png"
     },
     {
-      "id": "baopodanyuan",
-      "name": "爆破单元",
+      "id": "g102",
+      "name": "向心之引",
       "rarity": 5,
+      "weaponClass": "长柄",
+      "ideal": {
+        "base": "意志提升",
+        "add": "电磁伤害提升",
+        "skill": "压制"
+      },
+      "imageUrl": "https://bbs.hycdn.cn/image/2025/12/13/179550/cfc5f22138e0ee0af9047e7d05be42b3.png"
+    },
+    {
+      "id": "g82",
+      "name": "O.B.J.重荷",
+      "rarity": 5,
+      "weaponClass": "双手剑",
+      "ideal": {
+        "base": "力量提升",
+        "add": "生命提升",
+        "skill": "效益"
+      },
+      "imageUrl": "https://bbs.hycdn.cn/image/2025/12/13/179550/ec88a8b0d660b743d3adaf76713fb3f0.png"
+    },
+    {
+      "id": "g81",
+      "name": "终点之声",
+      "rarity": 5,
+      "weaponClass": "双手剑",
+      "ideal": {
+        "base": "力量提升",
+        "add": "生命提升",
+        "skill": "医疗"
+      },
+      "imageUrl": "https://bbs.hycdn.cn/image/2025/12/13/179550/cb0a7a607ef53fb880b4a02038cf3a54.png"
+    },
+    {
+      "id": "g66",
+      "name": "仰止",
+      "rarity": 5,
+      "weaponClass": "单手剑",
+      "ideal": {
+        "base": "敏捷提升",
+        "add": "物理伤害提升",
+        "skill": "夜幕"
+      },
+      "imageUrl": "https://bbs.hycdn.cn/image/2025/12/14/4898765/4cd481900824a3e75a4519baf9956846.png"
+    },
+    {
+      "id": "g65",
+      "name": "O.B.J.轻芒",
+      "rarity": 5,
+      "weaponClass": "单手剑",
+      "ideal": {
+        "base": "敏捷提升",
+        "add": "攻击提升",
+        "skill": "流转"
+      },
+      "imageUrl": "https://bbs.hycdn.cn/image/2025/12/14/4898765/25627c57e5593628b2bcd2dce02d41b6.png"
+    },
+    {
+      "id": "g63",
+      "name": "逐鳞3.0",
+      "rarity": 5,
+      "weaponClass": "单手剑",
+      "ideal": {
+        "base": "力量提升",
+        "add": "寒冷伤害提升",
+        "skill": "压制"
+      },
+      "imageUrl": "https://bbs.hycdn.cn/image/2025/12/14/4898765/848ff520db2f682bf91e2ff1216c88cc.png"
+    },
+    {
+      "id": "g61",
+      "name": "钢铁余音",
+      "rarity": 5,
+      "weaponClass": "单手剑",
+      "ideal": {
+        "base": "敏捷提升",
+        "add": "物理伤害提升",
+        "skill": "巧技"
+      },
+      "imageUrl": "https://bbs.hycdn.cn/image/2025/12/14/4898765/1b245cfa0cb252c208c4e91090626498.png"
+    },
+    {
+      "id": "g118",
+      "name": "荧光雷羽",
+      "rarity": 4,
       "weaponClass": "施术单元",
-      "ideal": { "base": "意志提升", "add": "法术伤害提升", "skill": "效益" }
+      "ideal": {
+        "base": "意志提升",
+        "add": "攻击提升",
+        "skill": "压制"
+      },
+      "imageUrl": "https://bbs.hycdn.cn/image/2025/12/17/4898765/9101ca1d3f6ea9d0f4cce34f6b830e19.png"
+    },
+    {
+      "id": "g107",
+      "name": "呼啸守卫",
+      "rarity": 4,
+      "weaponClass": "手铳",
+      "ideal": {
+        "base": "智识提升",
+        "add": "攻击提升",
+        "skill": "压制"
+      },
+      "imageUrl": "https://bbs.hycdn.cn/image/2025/12/13/179550/4159592c35d1926d3744134927c11937.png"
+    },
+    {
+      "id": "g98",
+      "name": "寻路者道标",
+      "rarity": 4,
+      "weaponClass": "长柄",
+      "ideal": {
+        "base": "敏捷提升",
+        "add": "攻击提升",
+        "skill": "昂扬"
+      },
+      "imageUrl": "https://bbs.hycdn.cn/image/2025/12/18/4898765/2c154215940184b90ca3d3a30af43099.png"
+    },
+    {
+      "id": "g78",
+      "name": "淬火者",
+      "rarity": 4,
+      "weaponClass": "双手剑",
+      "ideal": {
+        "base": "意志提升",
+        "add": "生命提升",
+        "skill": "粉碎"
+      },
+      "imageUrl": "https://bbs.hycdn.cn/image/2025/12/18/4898765/bb5a7987c2f45287a42558f2a0b97af8.png"
+    },
+    {
+      "id": "g77",
+      "name": "工业零点一",
+      "rarity": 4,
+      "weaponClass": "双手剑",
+      "ideal": {
+        "base": "力量提升",
+        "add": "攻击提升",
+        "skill": "压制"
+      },
+      "imageUrl": "https://bbs.hycdn.cn/image/2025/12/18/4898765/19f6482926ff3cb2b9d46c48764e6168.png"
+    },
+    {
+      "id": "g60",
+      "name": "浪潮",
+      "rarity": 4,
+      "weaponClass": "单手剑",
+      "ideal": {
+        "base": "智识提升",
+        "add": "攻击提升",
+        "skill": "追袭"
+      },
+      "imageUrl": "https://bbs.hycdn.cn/image/2025/12/14/4898765/cafdf9f78f54077d77fbed07b0d1678c.png"
+    },
+    {
+      "id": "g59",
+      "name": "显锋",
+      "rarity": 4,
+      "weaponClass": "单手剑",
+      "ideal": {
+        "base": "敏捷提升",
+        "add": "物理伤害提升",
+        "skill": "压制"
+      },
+      "imageUrl": "https://bbs.hycdn.cn/image/2025/12/14/4898765/5636efde70c4076675cdadc80c91714f.png"
     }
   ],
   "depositionPoints": [
     {
-      "id": "shuniu",
+      "id": "重度能量淤积点_枢纽区",
       "name": "重度能量淤积点·枢纽区",
       "region": "四号谷地",
-      "skillPool": ["压制"]
+      "skillPool": [
+        "效益",
+        "流转",
+        "迸发",
+        "巧技",
+        "粉碎",
+        "追袭",
+        "压制",
+        "强攻"
+      ]
     },
     {
-      "id": "yuanshi",
+      "id": "重度能量淤积点_源石研究园",
       "name": "重度能量淤积点·源石研究园",
       "region": "四号谷地",
-      "skillPool": ["压制", "附术"]
+      "skillPool": [
+        "效益",
+        "切骨",
+        "医疗",
+        "附术",
+        "巧技",
+        "昂扬",
+        "追袭",
+        "压制"
+      ]
     },
     {
-      "id": "kuangmai",
+      "id": "重度能量淤积点_矿脉源区",
       "name": "重度能量淤积点·矿脉源区",
       "region": "四号谷地",
-      "skillPool": ["压制", "追袭"]
+      "skillPool": [
+        "效益",
+        "夜幕",
+        "迸发",
+        "附术",
+        "残暴",
+        "巧技",
+        "压制",
+        "强攻"
+      ]
     },
     {
-      "id": "gongneng",
+      "id": "重度能量淤积点_首墩",
+      "name": "重度能量淤积点·首墩",
+      "region": "武陵",
+      "skillPool": [
+        "效益",
+        "流转",
+        "夜幕",
+        "附术",
+        "残暴",
+        "昂扬",
+        "追袭",
+        "强攻"
+      ]
+    },
+    {
+      "id": "重度能量淤积点_供能高地",
       "name": "重度能量淤积点·供能高地",
       "region": "四号谷地",
-      "skillPool": ["效益"]
+      "skillPool": [
+        "流转",
+        "切骨",
+        "医疗",
+        "附术",
+        "残暴",
+        "昂扬",
+        "粉碎",
+        "追袭"
+      ]
     },
     {
-      "id": "wulingcheng",
+      "id": "重度能量淤积点_武陵城",
       "name": "重度能量淤积点·武陵城",
       "region": "武陵",
-      "skillPool": ["巧技", "附术"]
+      "skillPool": [
+        "流转",
+        "夜幕",
+        "迸发",
+        "切骨",
+        "医疗",
+        "残暴",
+        "粉碎",
+        "强攻"
+      ]
     },
     {
-      "id": "qingbo",
+      "id": "重度能量淤积点_清波寨",
       "name": "重度能量淤积点·清波寨",
       "region": "武陵",
-      "skillPool": ["压制", "夜幕", "流转"]
+      "skillPool": [
+        "夜幕",
+        "迸发",
+        "切骨",
+        "医疗",
+        "巧技",
+        "昂扬",
+        "粉碎",
+        "压制"
+      ]
     }
   ]
 }

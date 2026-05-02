@@ -1,115 +1,106 @@
 /**
- * 从森空岛官方 wiki 抓取武器、基质、淤积点信息，写入 src/data/bundle.json。
+ * 通过 skland 官方 API（zonai.skland.com）拉取武器、基质，渲染 documentMap 后解析。
+ * 不依赖浏览器，纯 fetch + 签名。
  *
  * 用法：
- *   pnpm exec tsx scripts/scrape-skland.ts --ids="465,472,..."  # 用 gameEntryId 列表
- *   pnpm exec tsx scripts/scrape-skland.ts --discover            # 自动从 catalog 页发现 (TODO)
- *
- * 由于 skland wiki 是 SPA，必须用 Playwright 渲染后再读 DOM 文本。
+ *   pnpm scrape                # 全量拉取（catalog → 所有武器+基质）
+ *   pnpm scrape --dry-run      # 只打印解析结果，不写文件
+ *   pnpm scrape --limit=N      # 仅处理前 N 个 item，调试用
  */
-import { chromium } from "playwright";
 import fs from "node:fs";
 import path from "node:path";
 import { fileURLToPath } from "node:url";
 import { DataBundleSchema, validateBundle, type DataBundle } from "../src/data/schema";
-import { detailUrl, waitForRender } from "./lib/skland";
-import { parseSubstratePage, type SubstrateInfo } from "./lib/parse-substrate";
-import { parseWeaponPage, type WeaponInfo } from "./lib/parse-weapon";
+import { fetchCatalog, fetchItem } from "./lib/skland-api";
+import { parseSubstrate, type SubstrateInfo } from "./lib/parse-substrate";
+import { parseWeapon, type WeaponInfo } from "./lib/parse-weapon";
 
 const __dirname = path.dirname(fileURLToPath(import.meta.url));
 const BUNDLE_PATH = path.resolve(__dirname, "../src/data/bundle.json");
 
 interface CliArgs {
-  weaponIds: number[];
-  substrateIds: number[];
   dryRun: boolean;
-  fromManifest: boolean;
+  limit?: number;
+  weapons: boolean;
+  substrates: boolean;
 }
 
 function parseArgs(): CliArgs {
-  const out: CliArgs = {
-    weaponIds: [],
-    substrateIds: [],
-    dryRun: false,
-    fromManifest: false,
-  };
-  for (const arg of process.argv.slice(2)) {
-    if (arg.startsWith("--weapons=")) {
-      out.weaponIds = arg
-        .slice("--weapons=".length)
-        .split(",")
-        .map((s) => Number(s.trim()))
-        .filter((n) => Number.isFinite(n));
-    } else if (arg.startsWith("--substrates=")) {
-      out.substrateIds = arg
-        .slice("--substrates=".length)
-        .split(",")
-        .map((s) => Number(s.trim()))
-        .filter((n) => Number.isFinite(n));
-    } else if (arg === "--dry-run") {
-      out.dryRun = true;
-    } else if (arg === "--from-manifest") {
-      out.fromManifest = true;
-    }
+  const out: CliArgs = { dryRun: false, weapons: true, substrates: true };
+  for (const a of process.argv.slice(2)) {
+    if (a === "--dry-run") out.dryRun = true;
+    else if (a.startsWith("--limit=")) out.limit = Number(a.slice(8));
+    else if (a === "--no-weapons") out.weapons = false;
+    else if (a === "--no-substrates") out.substrates = false;
   }
-
-  if (out.fromManifest && out.weaponIds.length === 0 && out.substrateIds.length === 0) {
-    const manifestPath = path.resolve(__dirname, "skland-ids.json");
-    const manifest = JSON.parse(fs.readFileSync(manifestPath, "utf-8")) as {
-      weapons: number[];
-      substrates: number[];
-    };
-    out.weaponIds = manifest.weapons ?? [];
-    out.substrateIds = manifest.substrates ?? [];
-  }
-
   return out;
 }
 
+const SUBTYPE_WEAPON = "2";
+const SUBTYPE_SUBSTRATE = "7";
+
 async function main() {
   const args = parseArgs();
-  if (args.weaponIds.length === 0 && args.substrateIds.length === 0) {
-    console.error(
-      "Usage:\n" +
-        "  tsx scripts/scrape-skland.ts --weapons=1400,1401 --substrates=465,472\n" +
-        "  tsx scripts/scrape-skland.ts --from-manifest\n" +
-        "  add --dry-run to print without writing",
-    );
-    process.exit(1);
-  }
+  console.log("[scrape] fetching catalog...");
+  const catalog = await fetchCatalog(1);
+  const main = catalog[0];
+  if (!main) throw new Error("no catalog returned");
 
-  console.log("[scrape] launching browser...");
-  const browser = await chromium.launch();
-  const ctx = await browser.newContext({
-    userAgent:
-      "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/138.0.0.0 Safari/537.36",
-  });
-  const page = await ctx.newPage();
+  const weaponItems =
+    main.typeSub.find((t) => t.id === SUBTYPE_WEAPON)?.items ?? [];
+  const substrateItems =
+    main.typeSub.find((t) => t.id === SUBTYPE_SUBSTRATE)?.items ?? [];
+
+  console.log(
+    `[scrape] catalog: ${weaponItems.length} weapons, ${substrateItems.length} substrates`,
+  );
 
   const weapons: WeaponInfo[] = [];
-  for (const id of args.weaponIds) {
-    console.log(`[scrape] weapon ${id}`);
-    await page.goto(detailUrl("weapon", id));
-    await waitForRender(page);
-    const w = await parseWeaponPage(page, id);
-    if (w) weapons.push(w);
-    else console.warn(`  ! failed to parse weapon ${id}`);
+  if (args.weapons) {
+    const list = args.limit ? weaponItems.slice(0, args.limit) : weaponItems;
+    for (const item of list) {
+      try {
+        const detail = await fetchItem(item.itemId);
+        const parsed = parseWeapon(detail, item);
+        if (parsed) {
+          weapons.push(parsed);
+          console.log(`  ✓ ${item.name} (${parsed.weaponClass}) → ${parsed.ideal.base} / ${parsed.ideal.add} / ${parsed.ideal.skill}`);
+        } else {
+          console.log(`  - ${item.name}: skipped (not enough info)`);
+        }
+      } catch (err) {
+        console.warn(`  ! ${item.name} (${item.itemId}) failed:`, (err as Error).message);
+      }
+    }
   }
 
   const substrates: SubstrateInfo[] = [];
-  for (const id of args.substrateIds) {
-    console.log(`[scrape] substrate ${id}`);
-    await page.goto(detailUrl("substrate", id));
-    await waitForRender(page);
-    const s = await parseSubstratePage(page, id);
-    if (s) substrates.push(s);
-    else console.warn(`  ! failed to parse substrate ${id}`);
+  if (args.substrates) {
+    // 只处理 "无瑕基质·X" 前缀的（其他品质不需要）；wiki name 偶尔带前导空格
+    const list = (args.limit ? substrateItems.slice(0, args.limit) : substrateItems).filter(
+      (i) => i.name.trim().startsWith("无瑕基质"),
+    );
+    for (const item of list) {
+      try {
+        const detail = await fetchItem(item.itemId);
+        const parsed = parseSubstrate(detail);
+        if (parsed) {
+          substrates.push(parsed);
+          console.log(
+            `  ✓ ${item.name} → skill=${parsed.fixedSkill}, ${parsed.regions.length} regions`,
+          );
+        } else {
+          console.log(`  - ${item.name}: skipped`);
+        }
+      } catch (err) {
+        console.warn(`  ! ${item.name} (${item.itemId}) failed:`, (err as Error).message);
+      }
+    }
   }
 
-  await browser.close();
-
   if (args.dryRun) {
-    console.log(JSON.stringify({ weapons, substrates }, null, 2));
+    console.log("\n[dry-run] preview:");
+    console.log(JSON.stringify({ weapons, substrates }, null, 2).slice(0, 4000));
     return;
   }
 
@@ -125,29 +116,21 @@ async function mergeIntoBundle(input: {
     JSON.parse(fs.readFileSync(BUNDLE_PATH, "utf-8")),
   );
 
-  // Merge weapons by id (id = pinyin slug; we don't have pinyin here so use gameEntryId)
-  const weaponById = new Map(existing.weapons.map((w) => [w.id, w]));
-  for (const w of input.weapons) {
-    const id = `g${w.gameEntryId}`;
-    weaponById.set(id, {
-      id,
-      name: w.name,
-      rarity: w.rarity,
-      weaponClass: w.weaponClass as DataBundle["weapons"][number]["weaponClass"],
-      ideal: w.ideal,
-    });
-  }
+  // weapons：用 g{gameEntryId} 作为稳定 ID
+  const newWeapons = input.weapons.map((w) => ({
+    id: `g${w.gameEntryId}`,
+    name: w.name,
+    rarity: w.rarity,
+    weaponClass: w.weaponClass as DataBundle["weapons"][number]["weaponClass"],
+    ideal: w.ideal,
+    imageUrl: w.imageUrl,
+  }));
 
-  // Build new depositionPoints from substrates
-  const pointMap = new Map<string, { name: string; region: string; skills: Set<string> }>();
-  // Keep existing first
-  for (const p of existing.depositionPoints) {
-    pointMap.set(p.name, {
-      name: p.name,
-      region: p.region,
-      skills: new Set(p.skillPool),
-    });
-  }
+  // depositionPoints：从 substrates 反推 (region, point) → 支持的 skill 集合
+  const pointMap = new Map<
+    string,
+    { name: string; region: string; skills: Set<string> }
+  >();
   for (const s of input.substrates) {
     for (const r of s.regions) {
       for (const pname of r.points) {
@@ -162,8 +145,8 @@ async function mergeIntoBundle(input: {
     }
   }
 
-  const depositionPoints = [...pointMap.values()].map((p) => ({
-    id: p.name.replace(/[·\s]/g, "_"),
+  const newPoints = [...pointMap.values()].map((p) => ({
+    id: pinyinSafeId(p.name),
     name: p.name,
     region: p.region as DataBundle["depositionPoints"][number]["region"],
     skillPool: [...p.skills],
@@ -171,15 +154,19 @@ async function mergeIntoBundle(input: {
 
   const bundle: DataBundle = {
     attributes: existing.attributes,
-    weapons: [...weaponById.values()],
-    depositionPoints,
+    weapons: newWeapons.length > 0 ? newWeapons : existing.weapons,
+    depositionPoints: newPoints.length > 0 ? newPoints : existing.depositionPoints,
   };
 
-  // Validate
   DataBundleSchema.parse(bundle);
   validateBundle(bundle);
 
   fs.writeFileSync(BUNDLE_PATH, JSON.stringify(bundle, null, 2) + "\n");
+}
+
+function pinyinSafeId(name: string): string {
+  // 用一个稳定哈希，避免命名冲突
+  return name.replace(/[·\s]/g, "_").replace(/[^a-zA-Z0-9_一-龥]/g, "");
 }
 
 main().catch((err) => {

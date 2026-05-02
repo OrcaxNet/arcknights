@@ -11,7 +11,7 @@
     "preview": "next build && wrangler dev",
     "deploy": "next build && wrangler deploy",
     "scrape": "tsx scripts/scrape-skland.ts",
-    "scrape:manifest": "tsx scripts/scrape-skland.ts --from-manifest",
+    "scrape:dry": "tsx scripts/scrape-skland.ts --dry-run",
     "kv:upload": "tsx scripts/upload-bundle.ts",
     "kv:upload:local": "tsx scripts/upload-bundle.ts --local",
     "kv:get": "wrangler kv key get --binding=DATA --remote bundle"
@@ -28,7 +28,6 @@
     "@types/node": "^20",
     "@types/react": "^19",
     "@types/react-dom": "^19",
-    "playwright": "^1.59.1",
     "tailwindcss": "^4",
     "tsx": "^4.21.0",
     "typescript": "^5",

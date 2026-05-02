@@ -1,59 +1,69 @@
-import type { Page } from "playwright";
+import {
+  findWidgetByTitle,
+  getDocument,
+  getWidgetTabs,
+  type ItemFull,
+} from "./skland-api";
+import { findFirstTable, renderDocument } from "./document-text";
 
 export interface SubstrateInfo {
-  /** wiki 上的 gameEntryId，用于追踪/去重 */
   gameEntryId: number;
   /** 基质名称，如 "无瑕基质·压制" */
   name: string;
-  /** 该基质必出的技能属性，如 "压制" */
+  /** 必出技能 */
   fixedSkill: string;
   /** 可能出现的基础属性池 */
   basePool: string[];
   /** 可能出现的附加属性池 */
   addPool: string[];
-  /** 可能出现的技能属性池（含 fixedSkill） */
+  /** 可能出现的技能属性池 */
   skillPool: string[];
-  /** 该基质的所属区域 -> 淤积点列表 */
+  /** 区域 → 该区域的淤积点 */
   regions: { region: string; points: string[] }[];
 }
 
-const TABLE_HEADER_NOISE =
-  /属性名称属性词条初始数值蚀刻上限|属性名称|属性词条|初始数值|蚀刻上限/g;
+const PROP_CHAPTER = "基质属性";
+const W_FIXED_SKILL = "该基质必定出现的技能属性";
+const W_BASE = "该基质可能出现的基础属性";
+const W_ADD = "该基质可能出现的附加属性";
+const W_SKILL_POOL = "该基质可能出现的技能属性";
 
-const KNOWN_REGIONS = ["四号谷地", "武陵"] as const;
+const ACQ_CHAPTER = "获取方式";
+const W_REGION = "所属区域";
 
-export async function parseSubstratePage(
-  page: Page,
-  gameEntryId: number,
-): Promise<SubstrateInfo | null> {
-  const fullText = await page.textContent("main").catch(() => null);
-  if (!fullText) return null;
+export function parseSubstrate(item: ItemFull): SubstrateInfo | null {
+  const name = item.name.trim();
+  if (!name.startsWith("无瑕基质")) return null;
 
-  const nameMatch = fullText.match(/无瑕基质·[一-龥]+/);
-  if (!nameMatch) return null;
-  const name = nameMatch[0];
-  const fixedSkill = name.replace("无瑕基质·", "");
+  const fixedSkill = readFirstColumnNames(item, PROP_CHAPTER, W_FIXED_SKILL)[0];
+  const basePool = readFirstColumnNames(item, PROP_CHAPTER, W_BASE);
+  const addPool = readFirstColumnNames(item, PROP_CHAPTER, W_ADD);
+  const skillPool = readSkillPoolCells(item, PROP_CHAPTER, W_SKILL_POOL);
 
-  const basePool = extractPoolBetween(
-    fullText,
-    "该基质可能出现的基础属性",
-    "该基质可能出现的附加属性",
-  );
-  const addPool = extractPoolBetween(
-    fullText,
-    "该基质可能出现的附加属性",
-    "该基质可能出现的技能属性",
-  );
-  const skillPool = extractPoolBetween(
-    fullText,
-    "该基质可能出现的技能属性",
-    "注意：",
-  );
+  const regions: SubstrateInfo["regions"] = [];
+  const regionWidget = findWidgetByTitle(item, ACQ_CHAPTER, W_REGION);
+  if (regionWidget) {
+    for (const tab of getWidgetTabs(item, regionWidget.id)) {
+      const doc = getDocument(item, tab.documentId);
+      if (!doc) continue;
+      const text = renderDocument(doc);
+      const points = [
+        ...new Set(
+          (text.match(/重度能量淤积点·[一-龥]+/g) ?? []).filter(
+            (p) => p !== "重度能量淤积点",
+          ),
+        ),
+      ];
+      if (points.length > 0) {
+        regions.push({ region: tab.title, points });
+      }
+    }
+  }
 
-  const regions = extractRegions(fullText);
+  if (!fixedSkill) return null;
 
   return {
-    gameEntryId,
+    gameEntryId: Number(item.itemId),
     name,
     fixedSkill,
     basePool,
@@ -63,55 +73,53 @@ export async function parseSubstratePage(
   };
 }
 
-function extractPoolBetween(
-  text: string,
-  startMarker: string,
-  endMarker: string,
+/** 从一个 widget 的 default tab 文档拿表格，剔除表头后取第一列名称 */
+function readFirstColumnNames(
+  item: ItemFull,
+  chapterTitle: string,
+  widgetTitle: string,
 ): string[] {
-  const start = text.indexOf(startMarker);
-  if (start < 0) return [];
-  const end = text.indexOf(endMarker, start + startMarker.length);
-  let body = text.slice(start + startMarker.length, end > 0 ? end : undefined);
-  // 把所有表头文字干掉，避免被作为名称误捕
-  body = body.replace(TABLE_HEADER_NOISE, "│");
-  // 行的形态: <名称>+1~+X+Y，名称只由汉字组成
-  const matches = body.match(/[一-龥]{2,10}(?=\+\d+~\+)/g) ?? [];
-  return [...new Set(matches)];
+  const widget = findWidgetByTitle(item, chapterTitle, widgetTitle);
+  if (!widget) return [];
+  const [{ documentId } = { documentId: "" }] = getWidgetTabs(item, widget.id);
+  const doc = getDocument(item, documentId);
+  if (!doc) return [];
+  const rows = findFirstTable(doc);
+  return rows
+    .slice(1) // 跳过表头
+    .map((r) => r[0])
+    .filter((s) => s && s.length >= 2 && !/属性|蚀刻|初始|名称/.test(s));
 }
 
-/**
- * 文本结构：
- *   "...所属区域<R1><R2>...重度能量淤积点 <R1的点1> <R1的点2> 敌人掉落
- *    注意：... 重度能量淤积点 <R2的点1> 敌人掉落 注意：..."
- *
- * 即：每个区域的点列表用 "敌人掉落" 分隔；区域顺序在 "所属区域" 之后顺次列出。
- */
-function extractRegions(text: string) {
-  const start = text.indexOf("所属区域");
-  if (start < 0) return [];
-  const tail = text.slice(start);
+/** 技能池表格是双列布局，需要把所有列的"名称"都拼起来 */
+function readSkillPoolCells(
+  item: ItemFull,
+  chapterTitle: string,
+  widgetTitle: string,
+): string[] {
+  const widget = findWidgetByTitle(item, chapterTitle, widgetTitle);
+  if (!widget) return [];
+  const [{ documentId } = { documentId: "" }] = getWidgetTabs(item, widget.id);
+  const doc = getDocument(item, documentId);
+  if (!doc) return [];
+  const rows = findFirstTable(doc);
+  if (rows.length === 0) return [];
+  // 表头那行所有看起来是"属性名称"列的索引
+  const header = rows[0];
+  const nameColIdxs: number[] = [];
+  header.forEach((h, i) => {
+    if (h.includes("属性名称")) nameColIdxs.push(i);
+  });
+  if (nameColIdxs.length === 0) nameColIdxs.push(0);
 
-  // 提取区域顺序：在第一个 "重度能量淤积点" 之前出现的 region 列表
-  const firstHeaderIdx = tail.indexOf("重度能量淤积点");
-  const headerSection = tail.slice(0, firstHeaderIdx);
-  const regionOrder = KNOWN_REGIONS.filter((r) => headerSection.includes(r));
-
-  // 用 "敌人掉落" 分段。chunk i 对应 regionOrder[i] 的点。
-  const chunks = tail.split("敌人掉落");
-  const result: { region: string; points: string[] }[] = [];
-  // 点名 2~6 个汉字，遇到下一个 "重度能量淤积点" / "敌人" / "注意" 即停
-  const POINT_RE = /重度能量淤积点·([一-龥]+?)(?=重度能量淤积点|敌人|注意|$)/g;
-
-  for (let i = 0; i < regionOrder.length; i++) {
-    const chunk = chunks[i] ?? "";
-    const points: string[] = [];
-    for (const m of chunk.matchAll(POINT_RE)) {
-      const name = `重度能量淤积点·${m[1]}`;
-      if (!points.includes(name)) points.push(name);
-    }
-    if (points.length > 0) {
-      result.push({ region: regionOrder[i], points });
+  const out: string[] = [];
+  for (const r of rows.slice(1)) {
+    for (const idx of nameColIdxs) {
+      const v = r[idx];
+      if (v && v.length >= 1 && !/属性|蚀刻|初始|名称/.test(v)) {
+        if (!out.includes(v)) out.push(v);
+      }
     }
   }
-  return result;
+  return out;
 }

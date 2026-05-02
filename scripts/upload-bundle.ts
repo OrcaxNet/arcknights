@@ -4,7 +4,7 @@
  * 用法：
  *   pnpm run kv:upload                # 写入 production KV
  *   pnpm run kv:upload -- --local     # 写入 wrangler dev 的本地 KV (--local)
- *   pnpm run kv:upload -- --preview   # 写入 preview KV (如果配了 preview_id)
+ *   pnpm run kv:upload -- --preview   # 写入 preview KV
  */
 import { execFileSync } from "node:child_process";
 import fs from "node:fs";
@@ -27,23 +27,13 @@ function main() {
     `[upload] validated: ${parsed.weapons.length} weapons, ${parsed.depositionPoints.length} points`,
   );
 
-  // 用 stdin 传递避免命令行长度问题
-  const cmd = "wrangler";
-  const wargs = [
-    "kv",
-    "key",
-    "put",
-    "--binding",
-    "DATA",
-    "bundle",
-    raw,
-  ];
+  const wargs = ["kv", "key", "put", "--binding", "DATA", "bundle", raw];
   if (local) wargs.push("--local");
   if (preview) wargs.push("--preview");
   if (!local && !preview) wargs.push("--remote");
 
-  console.log(`[upload] ${cmd} ${wargs.slice(0, 6).join(" ")} <bundle.json> ${wargs.slice(7).join(" ")}`);
-  execFileSync(cmd, wargs, { stdio: "inherit" });
+  console.log(`[upload] wrangler kv key put --binding=DATA bundle <bundle.json>`);
+  execFileSync("wrangler", wargs, { stdio: "inherit" });
   console.log("[upload] done.");
 }
 
