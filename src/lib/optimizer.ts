@@ -57,16 +57,22 @@ export function optimize(
   if (weapons.length === 0) return [];
 
   const filteredPoints = pointFilter ? points.filter(pointFilter) : points;
-  const baseCombos = chooseK(BASE_ATTRS, BASE_LOCK_COUNT);
-  const addPoolSize = ADD_ATTRS.length;
 
   const plans: LockPlan[] = [];
 
   for (const point of filteredPoints) {
     if (point.skillPool.length === 0) continue;
+    // 实际作用于这个点位的 base/add 池：未声明则用全集
+    const pointBaseList = point.basePool ?? BASE_ATTRS;
+    const pointAddList = point.addPool ?? ADD_ATTRS;
+    if (pointBaseList.length < BASE_LOCK_COUNT) continue;
+
     const skillPoolSize = point.skillPool.length;
+    const addPoolSize = pointAddList.length;
+
+    const baseCombos = chooseK(pointBaseList, BASE_LOCK_COUNT);
     const lockables: { name: string; kind: "add" | "skill" }[] = [
-      ...ADD_ATTRS.map((a) => ({ name: a, kind: "add" as const })),
+      ...pointAddList.map((a) => ({ name: a, kind: "add" as const })),
       ...point.skillPool.map((s) => ({ name: s, kind: "skill" as const })),
     ];
 
@@ -76,8 +82,11 @@ export function optimize(
         const hits: { weaponId: string; prob: number }[] = [];
         let totalProb = 0;
         for (const w of weapons) {
+          // 武器自身的词条必须落在该点位的池里，否则永远不可能命中
           if (!baseSet.has(w.ideal.base)) continue;
           if (!point.skillPool.includes(w.ideal.skill)) continue;
+          if (!pointAddList.includes(w.ideal.add)) continue;
+
           let probUnlocked = 0;
           if (lock.kind === "add") {
             if (lock.name !== w.ideal.add) continue;

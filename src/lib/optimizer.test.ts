@@ -107,6 +107,37 @@ describe("optimize", () => {
   });
 });
 
+describe("optimize - point attribute pool restrictions", () => {
+  it("excludes weapon when its add is not in point.addPool", () => {
+    const a = W("a", "力量提升", "物理伤害提升", "压制");
+    const b = W("b", "力量提升", "法术伤害提升", "压制");
+    // point.addPool 仅含物理伤害提升 → 法术伤害提升的武器 b 不应命中
+    const point: DepositionPoint = {
+      id: "p",
+      name: "p",
+      region: "四号谷地",
+      skillPool: ["压制"],
+      addPool: ["物理伤害提升"],
+    };
+    const [best] = optimize([a, b], [point]);
+    expect(best.hits.map((h) => h.weaponId)).toEqual(["a"]);
+  });
+
+  it("excludes weapon when its base is not in point.basePool", () => {
+    const a = W("a", "力量提升", "物理伤害提升", "压制");
+    const b = W("b", "意志提升", "物理伤害提升", "压制");
+    const point: DepositionPoint = {
+      id: "p",
+      name: "p",
+      region: "四号谷地",
+      skillPool: ["压制"],
+      basePool: ["力量提升", "敏捷提升", "智识提升"],
+    };
+    const [best] = optimize([a, b], [point]);
+    expect(best.hits.map((h) => h.weaponId)).toEqual(["a"]);
+  });
+});
+
 describe("optimizeGrouped", () => {
   it("collapses multiple lock combos with same point + same hits into one group", () => {
     const a = W("a", "力量提升", "物理伤害提升", "压制");

@@ -38,7 +38,18 @@ export const DepositionPointSchema = z.object({
   id: z.string().min(1),
   name: z.string().min(1),
   region: RegionSchema,
+  /** 该点位会出现的技能词条（必填，决定能刷哪些技能向武器） */
   skillPool: z.array(z.string()).nonempty(),
+  /**
+   * 该点位会出现的基础属性。可选，留空 = 全 5 项均可。
+   * 若已知点位 base 池受限，写入这里以让优化器跳过不可能命中的武器。
+   */
+  basePool: z.array(z.string()).optional(),
+  /**
+   * 该点位会出现的附加属性。可选，留空 = 全 12 项均可。
+   * skland wiki 暂未暴露此数据，需玩家根据实战手动维护。
+   */
+  addPool: z.array(z.string()).optional(),
 });
 
 export const DataBundleSchema = z.object({
@@ -77,6 +88,14 @@ export function validateBundle(bundle: DataBundle) {
     for (const s of p.skillPool) {
       if (!skillSet.has(s))
         errors.push(`point "${p.id}" has unknown skill: ${s}`);
+    }
+    for (const b of p.basePool ?? []) {
+      if (!baseSet.has(b))
+        errors.push(`point "${p.id}" has unknown base: ${b}`);
+    }
+    for (const a of p.addPool ?? []) {
+      if (!addSet.has(a))
+        errors.push(`point "${p.id}" has unknown add: ${a}`);
     }
   }
   if (errors.length) {
