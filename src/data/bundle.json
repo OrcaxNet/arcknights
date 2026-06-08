@@ -40,6 +40,42 @@
   },
   "weapons": [
     {
+      "id": "g1572",
+      "name": "灯火使命",
+      "rarity": 6,
+      "weaponClass": "长柄",
+      "ideal": {
+        "base": "敏捷提升",
+        "add": "终结技效率提升",
+        "skill": "效益"
+      },
+      "imageUrl": "/img/6a2242fb9ab16252cef3df5b_13673ac9.png"
+    },
+    {
+      "id": "g1571",
+      "name": "幻想苦痛",
+      "rarity": 6,
+      "weaponClass": "双手剑",
+      "ideal": {
+        "base": "力量提升",
+        "add": "源石技艺提升",
+        "skill": "压制"
+      },
+      "imageUrl": "/img/6a223cf5ab15ab6521c2fcfe_f1525633.png"
+    },
+    {
+      "id": "g1569",
+      "name": "赤缨",
+      "rarity": 6,
+      "weaponClass": "双手剑",
+      "ideal": {
+        "base": "力量提升",
+        "add": "攻击提升",
+        "skill": "巧技"
+      },
+      "imageUrl": "/img/6a22369182b83c2815435f33_6ad0f152.png"
+    },
+    {
       "id": "g1382",
       "name": "孤舟",
       "rarity": 6,
@@ -194,18 +230,6 @@
         "skill": "医疗"
       },
       "imageUrl": "/img/869d470dc10a2af0e6a621b39d3b3ab1.png"
-    },
-    {
-      "id": "g128",
-      "name": "遗忘",
-      "rarity": 6,
-      "weaponClass": "施术单元",
-      "ideal": {
-        "base": "智识提升",
-        "add": "法术伤害提升",
-        "skill": "夜幕"
-      },
-      "imageUrl": "/img/edd2eec2a1f0d2013ea19b46c7071e77.png"
     },
     {
       "id": "g127",
@@ -398,6 +422,18 @@
         "skill": "夜幕"
       },
       "imageUrl": "/img/a9fc3999c4d382f13ae49c188f6af9fe.png"
+    },
+    {
+      "id": "g68",
+      "name": "不知归",
+      "rarity": 6,
+      "weaponClass": "单手剑",
+      "ideal": {
+        "base": "意志提升",
+        "add": "攻击提升",
+        "skill": "流转"
+      },
+      "imageUrl": "/img/534d76101624b41e6f48f2c8e88103d9.png"
     },
     {
       "id": "g67",
@@ -796,6 +832,7 @@
         "巧技",
         "粉碎",
         "追袭",
+        "压制",
         "强攻"
       ]
     },
@@ -810,7 +847,8 @@
         "附术",
         "巧技",
         "昂扬",
-        "追袭"
+        "追袭",
+        "压制"
       ]
     },
     {
@@ -824,6 +862,7 @@
         "附术",
         "残暴",
         "巧技",
+        "压制",
         "强攻"
       ]
     },
@@ -883,7 +922,8 @@
         "医疗",
         "巧技",
         "昂扬",
-        "粉碎"
+        "粉碎",
+        "压制"
       ]
     },
     {
@@ -896,7 +936,8 @@
         "附术",
         "残暴",
         "巧技",
-        "粉碎"
+        "粉碎",
+        "压制"
       ]
     }
   ]
