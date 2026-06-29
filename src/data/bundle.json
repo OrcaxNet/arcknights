@@ -64,6 +64,18 @@
       "imageUrl": "/img/6a223cf5ab15ab6521c2fcfe_f1525633.png"
     },
     {
+      "id": "g1570",
+      "name": "镀红祝福",
+      "rarity": 6,
+      "weaponClass": "长柄",
+      "ideal": {
+        "base": "敏捷提升",
+        "add": "灼热伤害提升",
+        "skill": "流转"
+      },
+      "imageUrl": "/img/6a3deb3dfe943eb264ed25e8_56331367.png"
+    },
+    {
       "id": "g1569",
       "name": "赤缨",
       "rarity": 6,
@@ -434,6 +446,18 @@
         "skill": "夜幕"
       },
       "imageUrl": "/img/a9fc3999c4d382f13ae49c188f6af9fe.png"
+    },
+    {
+      "id": "g68",
+      "name": "不知归",
+      "rarity": 6,
+      "weaponClass": "单手剑",
+      "ideal": {
+        "base": "意志提升",
+        "add": "攻击提升",
+        "skill": "流转"
+      },
+      "imageUrl": "/img/534d76101624b41e6f48f2c8e88103d9.png"
     },
     {
       "id": "g67",
@@ -832,7 +856,6 @@
         "巧技",
         "粉碎",
         "追袭",
-        "压制",
         "强攻"
       ]
     },
@@ -952,6 +975,14 @@
         "残暴",
         "巧技",
         "粉碎",
+        "压制"
+      ]
+    },
+    {
+      "id": "重度能量淤积点_枢",
+      "name": "重度能量淤积点·枢",
+      "region": "四号谷地",
+      "skillPool": [
         "压制"
       ]
     }
